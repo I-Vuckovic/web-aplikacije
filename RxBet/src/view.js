@@ -11,7 +11,6 @@ export default class View{
         this.drawLogin();
     }
 
-    
     drawLogin(){
 
         let container = document.createElement("div");
@@ -34,7 +33,7 @@ export default class View{
 
         let loginButton = document.createElement("button");
         loginButton.innerHTML = "Login";
-        loginButton.id = "login";
+        loginButton.id = "submit";
         //loginButton.class = "btn btn-primary";
         loginButton.onclick = (ev) => this.login();
         container.appendChild(loginButton);
@@ -42,19 +41,30 @@ export default class View{
         let registerButton = document.createElement("button");
         registerButton.innerHTML = "Register";
         registerButton.id = "loginRegister";
+        registerButton.onclick = (ev) => this.registerScreen();
         container.appendChild(registerButton);
         
         this.mainDiv.appendChild(container);
     }
 
+    registerScreen (){
+        document.getElementById("submit").onclick = (ev) => this.register();
+        document.getElementById("submit").innerHTML = "Register";
+        document.getElementById("loginRegister").innerHTML = "Back to login";
+        document.getElementById("loginRegister").onclick = (ev) => this.loginScreen();
+    }
+
+    loginScreen(){
+        document.getElementById("submit").onclick = (ev) => this.login();
+        document.getElementById("submit").innerHTML = "Login";
+        document.getElementById("loginRegister").innerHTML = "Register";
+        document.getElementById("loginRegister").onclick = (ev) => this.registerScreen();
+    }
+
     login(){
-
-        let userName = document.getElementById('userNameInput');
-        let pass = document.getElementById("passwordInput");
-
         let user = {
-            username: userName.value,
-            password: pass.value
+            username: document.getElementById('userNameInput').value,
+            password: document.getElementById("passwordInput").value
         }
 
         UserService.checkLoginInfo(user)
@@ -62,14 +72,25 @@ export default class View{
             this.successfulLogin();
         })
         .catch(err => console.log(err))
-
-
     }
 
     successfulLogin() {
-
         let elements = document.getElementsByClassName("container");
         elements[0].style.visibility = "hidden";
+    }
+
+    register(){
+
+        let newUser = {
+            username: document.getElementById("userNameInput").value,
+            password: document.getElementById("passwordInput").value
+        }
+
+        UserService.registerNewUser(newUser)
+        .then(()=>{
+            this.loginScreen();
+        })
+        .catch(err => console.log(err))
     }
 
 }
