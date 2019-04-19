@@ -5,12 +5,13 @@ html {
  }
 
 body {
-    background-image: linear-gradient(to top right, green, white);
-    background-repeat: no-repeat;
-    
+    background-color: lightgreen;
+    /* background-image: linear-gradient(to top right, green, white);
+    background-repeat: no-repeat; */
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
-.container{
+.startPage{
 
     display: flex;
     flex-direction: column;
@@ -30,13 +31,13 @@ body {
 	margin: auto;
 }
 
-.container h2{
+.startPage h2{
     text-align: center;
     color: white;
     
 }
 
-.container input, button{
+.startPage input, button{
 
     position: relative;
     margin: auto;
@@ -46,8 +47,51 @@ body {
     width: 50%;
 }
 
-.container input[id="userNameInput"]{
+.startPage input[id="userNameInput"]{
     margin-top: 1%;
+}
+
+.userNameExists {
+    background-color: lightcoral;
+}
+
+.mainPageDiv{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+}
+
+.sidebar {
+    display: block;
+    height: 100%; 
+    width: 200px; 
+    z-index: 1; 
+    top: 0;
+    left: 0;
+    background-color: #111; 
+    overflow-x: hidden; 
+    padding-top: 60px; 
+}
+
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }
+
+  .sidebar a:hover {
+    color: #f1f1f1;
+    cursor: pointer;
+  }
+
+.matchDiv{
+    height: 200px; width: 200px;
+    border: solid black 5px;
+    
 }
 
 

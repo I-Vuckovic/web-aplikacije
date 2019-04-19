@@ -3,48 +3,63 @@
 //Izbaciti default vrednosti iz input polja na login stranici
 //Omoguciti ponovo alert za uspesno prijavljivanje
 
+import {take, filter, map, sampleTime, debounceTime, switchMap} from "rxjs/operators";
+import {fromEvent} from "rxjs"
 import UserService from "./services/usersService";
+import MainPage from "./components/mainPage";
 
 export default class View{
     constructor(){
-        this.mainDiv = document.getElementById("app");        
-        this.drawLogin();
+        this.mainDiv = document.getElementById("app");      
+        
+        this.mainDiv.appendChild(MainPage.drawPage());
+        MainPage.dateObservable();
+        this.drawLogin(this.mainDiv);
+
+        if (sessionStorage.getItem("user") == null){
+            document.getElementById("mainPageDiv").style.visibility = "hidden";
+        }
+        else{
+            document.getElementById("startPage").style.visibility = "hidden";
+        }
+        
     }
 
-    drawLogin(){
+    drawLogin(parent){
 
-        let container = document.createElement("div");
-        container.className = "container";
+        let startPage = document.createElement("div");
+        startPage.className = "startPage";
+        startPage.id = "startPage";
 
         let tittle = document.createElement("h2");
         tittle.innerHTML = "Welcome to RxBET";
-        container.appendChild(tittle);
+        startPage.appendChild(tittle);
 
         let userNameInput = document.createElement("input");
         userNameInput.id = "userNameInput";
         userNameInput.value = "user1";
-        container.appendChild(userNameInput);
+        startPage.appendChild(userNameInput);
 
         let passInput = document.createElement("input");
         passInput.id = "passwordInput";
         passInput.type = "password";
         passInput.value = "user1";
-        container.appendChild(passInput);
+        startPage.appendChild(passInput);
 
         let loginButton = document.createElement("button");
         loginButton.innerHTML = "Login";
         loginButton.id = "submit";
         //loginButton.class = "btn btn-primary";
         loginButton.onclick = (ev) => this.login();
-        container.appendChild(loginButton);
+        startPage.appendChild(loginButton);
 
         let registerButton = document.createElement("button");
         registerButton.innerHTML = "Register";
         registerButton.id = "loginRegister";
         registerButton.onclick = (ev) => this.registerScreen();
-        container.appendChild(registerButton);
+        startPage.appendChild(registerButton);
         
-        this.mainDiv.appendChild(container);
+        parent.appendChild(startPage);
     }
 
     registerScreen (){
@@ -52,6 +67,22 @@ export default class View{
         document.getElementById("submit").innerHTML = "Register";
         document.getElementById("loginRegister").innerHTML = "Back to login";
         document.getElementById("loginRegister").onclick = (ev) => this.loginScreen();
+
+        this.registerObservable = fromEvent(document.getElementById("userNameInput"), 'input').pipe(
+            sampleTime(1000),
+            map( input =>{
+                return UserService.checkUserNameExist(input.srcElement.value);
+            })
+        ).subscribe(val => {
+            val.then((exists) => {
+                if(exists){
+                    document.getElementById("userNameInput").className = "userNameExists";
+                }
+                else{
+                    document.getElementById("userNameInput").classList.remove("userNameExists");
+                }
+            })
+        });
     }
 
     loginScreen(){
@@ -59,6 +90,9 @@ export default class View{
         document.getElementById("submit").innerHTML = "Login";
         document.getElementById("loginRegister").innerHTML = "Register";
         document.getElementById("loginRegister").onclick = (ev) => this.registerScreen();
+
+        document.getElementById("userNameInput").classList.remove("userNameExists");
+        this.registerObservable.unsubscribe();
     }
 
     login(){
@@ -69,14 +103,18 @@ export default class View{
 
         UserService.checkLoginInfo(user)
         .then(() =>{
+            sessionStorage.setItem("user", user.username);
             this.successfulLogin();
         })
         .catch(err => console.log(err))
     }
 
     successfulLogin() {
-        let elements = document.getElementsByClassName("container");
+        let elements = document.getElementsByClassName("startPage");
         elements[0].style.visibility = "hidden";
+
+        document.getElementById("mainPageDiv").style.visibility = "visible";
+        
     }
 
     register(){
@@ -87,10 +125,19 @@ export default class View{
         }
 
         UserService.registerNewUser(newUser)
-        .then(()=>{
-            this.loginScreen();
+        .then((exists)=>{
+            if(!exists)
+                this.loginScreen();
         })
         .catch(err => console.log(err))
+    }
+
+    createObservables(){
+        fromEvent(document.getElementById("userNameInput") , "input").pipe(
+            debounceTime(700),
+            map(ev => ev.target.value),
+            switchMap(id => (id))
+        )
     }
 
 }

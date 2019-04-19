@@ -1,15 +1,11 @@
 
 export default class UserService{
-    constructor(){
-
-    }
 
     static checkLoginInfo(user) {
 
         return fetch(`http://localhost:3000/users?username=${user.username}&password=${user.password}`)
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             if (res.length == 0){
                 alert("Lose uneti podaci");
                 return Promise.reject();
@@ -34,6 +30,7 @@ export default class UserService{
                 if (res.length != 0){
                     alert("Username vec postoji, izaberite drugi");
                     Promise.reject();
+                    return true;
                 }
                 else{
                     fetch ('http://localhost:3000/users', {
@@ -49,4 +46,29 @@ export default class UserService{
             })
         }
     }
+
+    static checkUserNameExist(username){
+        
+        return fetch(`http://localhost:3000/users?username=${username}`)
+        .then(res=> res.json())
+        .then(res => {
+            if (res.length == 0){
+                return false;
+            }
+            else {
+                return true;
+            }
+        })
+    }
+
+    static getMatches(category){
+
+        return fetch(`http://localhost:3000/${category}`)
+        .then(res => res.json())
+        .then(res =>{
+            return res;
+        })
+        .catch(err => console.log(err))
+    }
+    
 }
