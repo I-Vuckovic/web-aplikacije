@@ -13,7 +13,6 @@ export default class View{
         this.mainDiv = document.getElementById("app");      
         
         this.mainDiv.appendChild(MainPage.drawPage());
-        MainPage.dateObservable();
         this.drawLogin(this.mainDiv);
 
         if (sessionStorage.getItem("user") == null){
@@ -132,12 +131,5 @@ export default class View{
         .catch(err => console.log(err))
     }
 
-    createObservables(){
-        fromEvent(document.getElementById("userNameInput") , "input").pipe(
-            debounceTime(700),
-            map(ev => ev.target.value),
-            switchMap(id => (id))
-        )
-    }
 
 }

@@ -24,30 +24,75 @@
       "username": "user10",
       "password": "user1",
       "id": 5
+    },
+    {
+      "username": "user",
+      "password": "user1",
+      "id": 6
+    }
+  ],
+  "football": [
+    {
+      "id": 1,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.61,
+      "awayTeamOdd": 6.13,
+      "drawOdd": 2.45
+    },
+    {
+      "id": 1,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.61,
+      "awayTeamOdd": 6.13,
+      "drawOdd": 2.45
+    }
+  ],
+  "basketball": [
+    {
+      "id": 1,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01
     }
   ],
 
-    "football": [
-      {
-        "id": 1,
-        "homeTeam": "Radnicki",
-        "awayTeam": "Crvena Zvezda",
-        "date":  "2018-04-14"
-      },
-      {
-        "id": 1,
-        "homeTeam": "Radnicki",
-        "awayTeam": "Crvena Zvezda",
-        "date":  "2018-04-14"
-      }
-    ],
-
-    "basketball": [
-      {
-        "id": 1,
-        "homeTeam": "Radnicki",
-        "awayTeam": "Crvena Zvezda",
-        "date":  "2018-04-14"
-      }
-    ]
+  "matches": [
+    {
+      "id": 1,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "football"
+    },
+    {
+      "id": 2,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "football"
+    },
+    {
+      "id": 3,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "basketball"
+    }
+  ]
 }
