@@ -1,6 +1,6 @@
 import UserService from "../services/usersService";
 import { fromEvent, from } from "rxjs";
-import { map, scan, switchMap } from "rxjs/operators";
+import { map, scan, switchMap, filter } from "rxjs/operators";
 
 
 export default class Ticket{
@@ -62,9 +62,10 @@ export default class Ticket{
 
     static addMatch(matchId, odd){
         
-        let alreadyAdded = document.getElementsByClassName("match");
+        let alreadyAdded = document.getElementById("selectedMatches").getElementsByClassName("match");
+        let current = Array.from(alreadyAdded).filter(el => el.id == matchId);
        
-        if ( !Array.from(alreadyAdded).includes(document.getElementById(matchId))){
+        if ( !current[0]){
             UserService.getMatches(`matches/${matchId}`).then(match=> {
                 let matchCointainer = document.createElement("div");
                 matchCointainer.className = "match";
@@ -81,16 +82,23 @@ export default class Ticket{
                 removeMatch.className = "removeMatch";
                 removeMatch.innerHTML = "X";
                 removeMatch.onclick = (ev) => {
-                    document.getElementById("selectedMatches").removeChild(document.getElementById(matchId));
+                    //console.log(document.getElementById("selectedMatches").getElementById(matchId));
+                    let alreadyAdded = document.getElementById("selectedMatches").getElementsByClassName("match");
+                    let forRemoval = Array.from(alreadyAdded).filter(el => el.id == matchId);
+                    document.getElementById("selectedMatches").removeChild(forRemoval[0]);
                     if (document.getElementsByClassName("match").length == 0){
                         document.getElementById("totalOdd").innerHTML = 0;
                         document.getElementById("totalWin").innerHTML = 0;
                     }
-                    else
+                    else{
                         this.oddObs().subscribe(val => {
                             document.getElementById("totalOdd").innerHTML = val;
                         });
-                    this.updateWin();
+                    }
+
+                    this.oddObs().subscribe( val => {
+                        document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
+                    })
                     
                 }
                 matchCointainer.appendChild(removeMatch);
@@ -99,29 +107,29 @@ export default class Ticket{
 
                 this.oddObs().subscribe(val => {
                     document.getElementById("totalOdd").innerHTML = val;
+                    document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
                 });
-
-                this.updateWin();
 
             })
         }
         else{
-            let previousOdd = document.getElementById(matchId).getElementsByTagName("div")[0];
+            let previousOdd = current[0].getElementsByTagName("div")[0];
 
             if (previousOdd.innerHTML != odd)
                 previousOdd.innerHTML = odd;
 
             this.oddObs().subscribe(val => {
                 document.getElementById("totalOdd").innerHTML = val;
+                document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
             });
             
-            this.updateWin();
         }
 
     }
 
     static oddObs(){
         return from(document.getElementsByClassName("match")).pipe(
+            filter(match => !match.classList.contains("onTicketFinished")),
             map(match => {
                 return match.getElementsByTagName("div")[0].innerHTML;
             }),
@@ -129,22 +137,25 @@ export default class Ticket{
         )
     }
 
-    static updateWin(){
-
-        this.oddObs().subscribe( val => {
-             document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
-        })
-    }
-
     static oddChange(matchId, odd, oldOdd){
         let alreadyAdded = document.getElementsByClassName("match");
-
         let previous = Array.from(alreadyAdded).filter (el => el.id == matchId);
-        if (previous.length > 0)
         
-        if (Array.from(alreadyAdded).includes(document.getElementById(matchId))
-            && previous.length > 0 && previous[0].getElementsByTagName("div")[0].innerHTML == oldOdd)
+        if ( previous.length > 0 && previous[0].getElementsByTagName("div")[0].innerHTML == oldOdd)
             this.addMatch(matchId, odd);
 
+    }
+
+    static matchFinished(id){
+        let alreadyAdded = document.getElementById("selectedMatches").getElementsByClassName("match");
+        let current = Array.from(alreadyAdded).filter(el => el.id == id);
+        if (current.length > 0) {
+            current[0].classList.add("onTicketFinished");
+            
+            this.oddObs().subscribe( val => {
+                document.getElementById("totalOdd").innerHTML = val;
+                document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
+            })
+        }
     }
 }

@@ -209,6 +209,7 @@ body {
 .choice:hover{
     color: #f1f1f1;
     cursor: pointer;
+    background-image: none;
     background-color: #818181;
 }
 
@@ -217,3 +218,20 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none; 
     margin: 0; 
   }
+
+.oddRaised {
+    background-image: linear-gradient(to top right, black 70% , green); 
+}
+
+.oddLowered {
+    background-image: linear-gradient(to bottom right, black 70% , red); 
+}
+
+.finished{
+    background-image: none;
+    background-color: red;
+}
+
+.onTicketFinished{
+    opacity: 0.3;
+}

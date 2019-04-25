@@ -102,7 +102,8 @@ export default class View{
 
         UserService.checkLoginInfo(user)
         .then(() =>{
-            sessionStorage.setItem("user", user.username);
+            sessionStorage.setItem("user", user);
+            console.log(sessionStorage.getItem("user"));
             this.successfulLogin();
         })
         .catch(err => console.log(err))

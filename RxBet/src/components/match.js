@@ -1,5 +1,5 @@
-import {timer, interval, fromEvent, from } from "rxjs";
-import { map } from "rxjs/operators";
+import {timer, interval, fromEvent, from, of, Observable } from "rxjs";
+import { map, takeUntil, take, debounce, debounceTime, filter } from "rxjs/operators";
 import Ticket from "./ticket";
 
 
@@ -45,55 +45,56 @@ export default class Match {
         awayTeamOdd.innerHTML = match.awayTeamOdd;
         oddsDiv.appendChild(awayTeamOdd);
 
-        
-
         return mainDiv;
     }
 
     static drawTableRow(match) {
         let row = document.createElement("tr");
         row.className = "matchRow";
+        row.id = match.id;
         let column = document.createElement("td");
         column.innerHTML = match.id + ". " +  match.homeTeam + " vs " + match.awayTeam;
         row.appendChild(column);
 
         column = document.createElement("td");
         column.style.width = "75px";
-        let matchTime = timer(1000, 1000).pipe(
-            map( value => {
-                let minutes = parseInt(value / 60);
-                
-                return minutes.toString() + " : " + (value%60).toString();
-            })
-        )
         row.appendChild(column);
-        
-        matchTime.subscribe( time => {
-            column.innerHTML = time;
-        })
 
+        let currentTime = match.time;
+
+        if (currentTime < 2700){
+
+            let matchTime = timer(1000, 1000).pipe(
+                take(2710 - currentTime),
+                map( value => {
+                    value += currentTime;
+                    let minutes = parseInt(value / 60);
+                    
+                    return minutes.toString() + " : " + (value%60).toString();
+                }),
+            )      
+
+            matchTime.subscribe( time => {
+                column.innerHTML = time;
+            },
+            err => console.log(err),
+            () => {
+                column.innerHTML = "Half time";
+                this.halfTime(column, row);
+            })
+        }
+        else{
+            this.secondHalf(currentTime, column, row)
+        }
+        
         let scoreHome = document.createElement("td");
         scoreHome.innerHTML = 0;
         scoreHome.style.width = "50px";
+        scoreHome.className = "score";
         let scoreAway = document.createElement("td");
         scoreAway.style.width = "50px";
         scoreAway.innerHTML = 0;
-        
-        timer(100000).subscribe( value => {
-            if(Math.random() * 100 < 15){
-                let currentScore = parseInt(scoreHome.innerHTML);
-                currentScore += 1;
-                scoreHome.innerHTML = currentScore;
-            }
-        })
-
-        timer(100000).subscribe( value => {
-            if(Math.random() * 100 < 15){
-                let currentScore = parseInt(scoreAway.innerHTML);
-                currentScore += 1;
-                scoreAway.innerHTML = currentScore;
-            }
-        })
+        scoreAway.className = "score";
 
         row.appendChild(scoreAway);
         row.appendChild(scoreHome);
@@ -111,9 +112,13 @@ export default class Match {
         odd.className = "choice";
         odd.id = "odd";
         odd.innerHTML = value;
+        odd.style.width = "50px";
 
-        fromEvent(odd, "click").subscribe( (val) => {
-            Ticket.addMatch(id, val.target.innerHTML);
+        fromEvent(odd, "click").pipe(
+            debounceTime(200),
+            filter(ev => !ev.target.classList.contains("finished"))
+        ).subscribe( () => {
+            Ticket.addMatch(id, odd.innerHTML);
         })
         return odd;
     }
@@ -133,9 +138,36 @@ export default class Match {
         return sportTable;
     }
 
+    static halfTime(column, row){
+        timer(1000, 1000).pipe(
+            take(1500)
+        ).subscribe(
+            () => { row.classList.add("halftime")},
+            err => console.log(err),
+            () => this.secondHalf(2700, column, row)
+        )
+    }
 
-    static oddChanger() {
+    static secondHalf(currentTime, column, row){
+        let matchTime = timer(1000, 1000).pipe(
+            take(5410 - currentTime),
+            map( value => {
+                value += currentTime;
+                let minutes = parseInt(value / 60);
+                
+                return minutes.toString() + " : " + (value%60).toString();
+            }),
+        )      
 
-       
+        matchTime.subscribe( 
+            time => {column.innerHTML = time;},
+            err => console.log(err),
+            () => {
+                column.innerHTML = "Match finished";
+                row.classList.add("finished");
+                let ods = row.getElementsByClassName("choice");
+                Array.from(ods).forEach(el => el.classList.add("finished"));
+                Ticket.matchFinished(row.id);
+            })
     }
 }
