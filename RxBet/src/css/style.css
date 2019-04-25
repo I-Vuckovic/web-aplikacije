@@ -150,8 +150,22 @@ body {
 .match {
     background-color: lightgrey;
     height: 60px;
+    font-size: 95%;
+}
+
+.removeMatch{
+    float: right;
+    position: relative;
+    margin-right: 10px;
+}
+.removeMatch:hover{
+    color: red;
+    cursor: pointer;
+    
 }
 .chosenOdd{
+    float: left;
+    
     text-align: center;
     vertical-align: center;
     background-color : yellowgreen;
@@ -198,4 +212,8 @@ body {
     background-color: #818181;
 }
 
-
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }

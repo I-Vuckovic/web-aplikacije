@@ -1,4 +1,4 @@
-import {timer, interval, fromEvent } from "rxjs";
+import {timer, interval, fromEvent, from } from "rxjs";
 import { map } from "rxjs/operators";
 import Ticket from "./ticket";
 
@@ -45,6 +45,8 @@ export default class Match {
         awayTeamOdd.innerHTML = match.awayTeamOdd;
         oddsDiv.appendChild(awayTeamOdd);
 
+        
+
         return mainDiv;
     }
 
@@ -52,7 +54,7 @@ export default class Match {
         let row = document.createElement("tr");
         row.className = "matchRow";
         let column = document.createElement("td");
-        column.innerHTML = match.homeTeam + " vs " + match.awayTeam;
+        column.innerHTML = match.id + ". " +  match.homeTeam + " vs " + match.awayTeam;
         row.appendChild(column);
 
         column = document.createElement("td");
@@ -95,9 +97,7 @@ export default class Match {
 
         row.appendChild(scoreAway);
         row.appendChild(scoreHome);
-
-
-        
+ 
         row.appendChild(this.drawOdd(match.homeTeamOdd, match.id));
         row.appendChild(this.drawOdd(match.drawOdd, match.id));
         row.appendChild(this.drawOdd(match.awayTeamOdd, match.id));
@@ -131,5 +131,11 @@ export default class Match {
         sportTable.appendChild(tableHeader);
 
         return sportTable;
+    }
+
+
+    static oddChanger() {
+
+       
     }
 }
