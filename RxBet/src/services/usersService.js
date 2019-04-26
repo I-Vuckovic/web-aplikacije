@@ -12,7 +12,7 @@ export default class UserService{
             }
             else{
                 //alert("uspeno prijavljen");
-                return Promise.resolve();
+                return res;
             }
         })
     }
@@ -33,9 +33,14 @@ export default class UserService{
                     return true;
                 }
                 else{
+                    const newUser = {
+                        username: user.username,
+                        password: user.password,
+                        balance: 100
+                    }
                     fetch ('http://localhost:3000/users', {
                         method: "POST",
-                        body: JSON.stringify(user),
+                        body: JSON.stringify(newUser),
                         headers: {
                            'Content-Type': 'application/json'
                         } 
@@ -67,6 +72,24 @@ export default class UserService{
         .then(res => res.json())
         .then(res =>{
             return res;
+        })
+        .catch(err => console.log(err))
+    }
+
+    static balanceChange(newBalance, id){
+
+        fetch (`http://localhost:3000/users/${id}`)
+        .then(res => res.json())
+        .then(res => {
+            res.balance = newBalance;
+            fetch (`http://localhost:3000/users/${id}`, {
+                method: "PUT",
+                body: JSON.stringify(res),
+                headers: {
+                    'Content-Type': 'application/json'
+                } 
+            })
+            .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
     }

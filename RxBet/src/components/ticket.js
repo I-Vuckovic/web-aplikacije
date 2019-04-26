@@ -1,6 +1,7 @@
 import UserService from "../services/usersService";
 import { fromEvent, from } from "rxjs";
 import { map, scan, switchMap, filter } from "rxjs/operators";
+import MainPage from "./mainPage";
 
 
 export default class Ticket{
@@ -56,6 +57,8 @@ export default class Ticket{
         placeBet.innerHTML = "Place bet";
         ticketMainDiv.appendChild(placeBet);
 
+        placeBet.onclick = () => this.placeBet();
+
         return ticketMainDiv;
 
     }
@@ -69,9 +72,11 @@ export default class Ticket{
             UserService.getMatches(`matches/${matchId}`).then(match=> {
                 let matchCointainer = document.createElement("div");
                 matchCointainer.className = "match";
-                matchCointainer.innerHTML =  matchId + " " + match.homeTeam + " vs " +  match.awayTeam;
                 matchCointainer.id = match.id;
-
+                let matchTitle = document.createElement("div");
+                matchTitle.innerHTML =  matchId + " " + match.homeTeam + " vs " +  match.awayTeam;
+                matchCointainer.append(matchTitle);
+                
                 let chosenOddValue = document.createElement("div");
                 chosenOddValue.innerHTML = odd;
                 chosenOddValue.id = "chosenOdd"
@@ -82,7 +87,6 @@ export default class Ticket{
                 removeMatch.className = "removeMatch";
                 removeMatch.innerHTML = "X";
                 removeMatch.onclick = (ev) => {
-                    //console.log(document.getElementById("selectedMatches").getElementById(matchId));
                     let alreadyAdded = document.getElementById("selectedMatches").getElementsByClassName("match");
                     let forRemoval = Array.from(alreadyAdded).filter(el => el.id == matchId);
                     document.getElementById("selectedMatches").removeChild(forRemoval[0]);
@@ -113,7 +117,7 @@ export default class Ticket{
             })
         }
         else{
-            let previousOdd = current[0].getElementsByTagName("div")[0];
+            let previousOdd = current[0].getElementsByTagName("div")[1];
 
             if (previousOdd.innerHTML != odd)
                 previousOdd.innerHTML = odd;
@@ -131,7 +135,7 @@ export default class Ticket{
         return from(document.getElementsByClassName("match")).pipe(
             filter(match => !match.classList.contains("onTicketFinished")),
             map(match => {
-                return match.getElementsByTagName("div")[0].innerHTML;
+                return match.getElementsByTagName("div")[1].innerHTML;
             }),
             scan((acc, value)=> (acc * value).toFixed(2))
         )
@@ -156,6 +160,29 @@ export default class Ticket{
                 document.getElementById("totalOdd").innerHTML = val;
                 document.getElementById("totalWin").innerHTML = (val * document.getElementById("stake").value).toFixed(2);
             })
+        }
+    }
+
+    static placeBet(){
+        if (document.getElementById("stake").value <= 0){
+            alert("Please enter a valid amount");
+        }
+        else{
+            if (parseFloat(document.getElementById("totalOdd").innerHTML) == 0){
+                alert("Please choce atleast one match");
+            }
+            else {
+                if (parseInt(sessionStorage.getItem("balance")) < document.getElementById("stake").value){
+                    alert("You do not have enough money in your balance");
+                }
+                else{
+                    alert(`You have placed a bet\nTotal odd: ${document.getElementById("totalOdd").innerHTML}\nTotal potential win: ${document.getElementById("totalWin").innerHTML}`);
+                    let newBalance = sessionStorage.getItem("balance") - document.getElementById("stake").value;
+                    sessionStorage.setItem("balance", newBalance);
+                    UserService.balanceChange(newBalance, sessionStorage.getItem("id"));
+                    MainPage.updateBalance(newBalance);
+                }
+            }
         }
     }
 }

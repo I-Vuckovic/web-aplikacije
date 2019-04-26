@@ -3,7 +3,6 @@ import View from "./view"
 import { interval } from "rxjs";
 import { Engine } from "./engine";
 
-
 const view = new View();
 
 function loadBody (){

@@ -3,39 +3,54 @@
     {
       "id": 1,
       "username": "user1",
-      "password": "user1"
-    },
-    {
-      "username": "user2",
-      "password": "user2",
-      "id": 2
+      "password": "user1",
+      "balance": 100
     },
     {
       "username": "user3",
       "password": "user3",
-      "id": 3
+      "id": 3,
+      "balance": 100
     },
     {
       "username": "user5",
       "password": "user1",
-      "id": 4
+      "id": 4,
+      "balance": 100
     },
     {
       "username": "user10",
       "password": "user1",
-      "id": 5
+      "id": 5,
+      "balance": 100
     },
     {
       "username": "user",
       "password": "user1",
-      "id": 6
+      "id": 6,
+      "balance": 100
+    },
+    {
+      "username": "user2",
+      "password": "user2",
+      "balance": 9,
+      "id": 7
     }
   ],
-  
-
   "matches": [
     {
       "id": 1,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "football",
+      "time": 987
+    },
+    {
+      "id": 6,
       "homeTeam": "Radnicki",
       "awayTeam": "Crvena Zvezda",
       "date": "2018-04-14",
@@ -65,8 +80,29 @@
       "awayTeamOdd": 6.05,
       "drawOdd": 2.01,
       "category": "basketball",
-      "time": 5399
-
+      "time": 1000
+    },
+    {
+      "id": 4,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "basketball",
+      "time": 564
+    },
+    {
+      "id": 5,
+      "homeTeam": "Radnicki",
+      "awayTeam": "Crvena Zvezda",
+      "date": "2018-04-14",
+      "homeTeamOdd": 1.75,
+      "awayTeamOdd": 6.05,
+      "drawOdd": 2.01,
+      "category": "basketball",
+      "time": 543
     }
   ]
 }

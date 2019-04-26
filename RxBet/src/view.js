@@ -101,9 +101,13 @@ export default class View{
         }
 
         UserService.checkLoginInfo(user)
-        .then(() =>{
-            sessionStorage.setItem("user", user);
-            console.log(sessionStorage.getItem("user"));
+        .then(returnedUser =>{
+            sessionStorage.setItem("id", returnedUser[0].id)
+            sessionStorage.setItem("user", returnedUser[0].username);
+            sessionStorage.setItem("balance", returnedUser[0].balance);
+            if (document.getElementById("balance") != null){
+                MainPage.updateBalance(returnedUser[0].balance);
+            }
             this.successfulLogin();
         })
         .catch(err => console.log(err))

@@ -13,7 +13,8 @@ export class Engine{
         const $interval = interval(1000);
 
         const $observable = zip($interval, $matches).pipe(
-            filter( match => !match[1].classList.contains("finished") && !match[1].classList.contains("halftime")),
+            filter( match => !match[1].classList.contains("finished") && !match[1].classList.contains("halftime") 
+                                && !match[1].classList.contains("quaterbreak")),
             map( match => match[1]),
             repeat(-1)
         )

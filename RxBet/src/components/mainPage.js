@@ -16,8 +16,8 @@ export default class MainPage{
 
         let matchesContainer = document.createElement("div");
         matchesContainer.className = "matchesContainer";
+        matchesContainer.id = "matchesContainer";
 
-        
         matchesContainer.appendChild(Match.matchTable("Football"));
         matchesContainer.appendChild(Match.matchTable("Basketball"));
 
@@ -39,13 +39,13 @@ export default class MainPage{
         sessionStorage.clear();
         document.getElementById("mainPageDiv").style.visibility = "hidden";
         document.getElementById("startPage").style.visibility = "visible";
-        document.getElementById("matchesContainer").innerHTML = "";
+        document.getElementById("matchesContainer").style.visibility = "hiden";
         
     }
 
     static drawSideBar(parent){
 
-        let sideBar = document.createElement("div");
+        const sideBar = document.createElement("div");
         sideBar.className = "sidebar";
         sideBar.id = "sidebar";
 
@@ -54,12 +54,12 @@ export default class MainPage{
 
         const football = this.drawSideBarButton(sideBar, "Football");
         football.onclick = (ev) => {
-            this.getMatches("football");
+            this.getMatches("Football");
         }
 
         const basketball = this.drawSideBarButton(sideBar, "Basketball");
         basketball.onclick = (ev) => {
-            this.getMatches("basketball");
+            this.getMatches("Basketball");
         }
 
         const all = this.drawSideBarButton(sideBar, "All");
@@ -67,6 +67,19 @@ export default class MainPage{
             this.getMatches("");
         }
         
+        const balanceDiv = document.createElement("div");
+        balanceDiv.className = "balance";
+        balanceDiv.id = "balance";
+        balanceDiv.innerHTML = "Balance: " + sessionStorage.getItem("balance");
+        sideBar.appendChild(balanceDiv); 
+
+        const addBalance = this.drawSideBarButton(sideBar, "Add balance")
+        addBalance.onclick = () => {
+            let newBalance = parseInt(sessionStorage.getItem("balance")) + 100;
+            sessionStorage.setItem("balance", newBalance);
+            UserService.balanceChange(newBalance, sessionStorage.getItem("id"));
+            this.updateBalance(newBalance);
+        }
 
         parent.appendChild(sideBar);
     }
@@ -74,22 +87,44 @@ export default class MainPage{
     static getMatches(matchCategory){
         
         let tables = document.getElementsByClassName("sportTable");
-        Array.from(tables).forEach ( table => {
-            if (table.id != matchCategory && matchCategory!= "")
-                table.style.visibility = "hidden";
-            else
-                table.style.visibility = "visible";
-
+        Array.from(tables).forEach(el =>{
+            el.parentElement.removeChild(el);
         })
+        if (matchCategory == ""){
+            matchesContainer.appendChild(Match.matchTable("Football"));
+            matchesContainer.appendChild(Match.matchTable("Basketball"));
+        }
+        else{
+            document.getElementById("matchesContainer").appendChild(Match.matchTable(matchCategory));
+        }
+
+        UserService.getMatches("matches")
+        .then( res => {
+            let filtered;
+            if (matchCategory != ""){
+                filtered =  res.filter( el => el.category == matchCategory.toLowerCase());
+            }else{
+                filtered = res;
+            }
+
+            filtered.forEach ( element => {
+                document.getElementById(element.category).appendChild(Match.drawTableRow(element));
+            })
+        })
+        .catch(err => console.log(err))
     }
 
     static drawSideBarButton(parent, text){
 
-        let logout = document.createElement("a");
-        logout.innerHTML = text;
-        logout.className = "button";
-        parent.appendChild(logout);
-        return logout;
+        let button = document.createElement("a");
+        button.innerHTML = text;
+        button.className = "button";
+        parent.appendChild(button);
+        return button;
+    }
+
+    static updateBalance(newBalance){
+        document.getElementById("balance").innerHTML = `Balance: ${newBalance}`;
     }
 
     //Bilo je korisceno u prvobitnoj ideji vise nema koristi
