@@ -1,10 +1,6 @@
 import { combineReducers } from "redux";
-
-export interface AppState{
-    logedIn: boolean
-}
-
+import { userReducer } from "./userReducer";
 
 export const rootReducer = combineReducers({
-
+    user: userReducer
 })

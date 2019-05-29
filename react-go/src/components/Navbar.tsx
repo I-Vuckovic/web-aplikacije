@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import M from 'materialize-css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userState } from '../reducers/userReducer';
 
-export default class Navbar extends Component {
+interface Props {
+    logedIn: boolean
+}
+
+class Navbar extends Component<Props> {
 
     componentDidMount() {
         document.addEventListener('DOMContentLoaded', () => {
@@ -28,9 +34,15 @@ export default class Navbar extends Component {
                             <li><Link to="/Prvi link">Prvi link</Link></li>
                             <li><Link to="/Drugi link">Drugi link</Link></li>
                             <li><Link to="/Treci link">Treci link</Link></li>
-                            <li>
-                                <a className="waves-effect waves-light btn indigo lighten-1"><i className="material-icons left">account_circle</i>Login</a>
-                            </li>
+                            {this.props.logedIn ?
+
+                                <li>
+                                    Ulogovan
+                                </li> :
+                                <li>
+                                    <Link to="/login" className="waves-effect waves-light btn indigo lighten-1"><i className="material-icons left">account_circle</i>Login</Link>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </nav>
@@ -44,3 +56,15 @@ export default class Navbar extends Component {
         )
     }
 }
+
+function mapStateToProps(state: any) {
+
+    return {
+        //Iz nekog (meni idalje nepoznatog) razloga state napravi objekat "user" koji onda tek ima svoj "logedIn" i cak svog 
+        //novog user-a
+        logedIn: state.user.logedIn
+        
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);

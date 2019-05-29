@@ -1,12 +1,18 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import { BrowserRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { rootReducer } from './reducers/rootReducer';
+import Login from './components/Login';
+import createSagaMiddleware from 'redux-saga';
+import { rootSaga } from './sagas/rootSaga';
 
-const store = createStore(rootReducer);
-
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(rootReducer,
+  applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
+//store.dispatch(login({username: "blaaaaaaaaaa", password: "bgeeeeeeeeeeee"}));
 
 class App extends React.Component {
   render() {
@@ -15,6 +21,8 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Navbar></Navbar>
+            <Route path="/"></Route>
+            <Route path="/login" component={Login}></Route>
 
           </div>
         </BrowserRouter>
