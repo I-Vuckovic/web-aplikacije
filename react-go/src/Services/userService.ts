@@ -1,9 +1,13 @@
 import { User } from "../models/user";
+import { USERS } from "../constants/urls";
 
-const url = "http://localhost:3001/users";
-
-export function fetchUser(user: User) {
-    return fetch(`${url}?username=${user.username}&password=${user.password}`)
-        .then(res => res.json())
+export async function fetchUser(user: User) {
+    const res = await fetch(`${USERS}?username=${user.username}&password=${user.password}`);
+    return await res.json();
         
+}
+
+export async function getUser(id: number){
+    const res = await fetch(`${USERS}?id=${id}`);
+    return await res.json();
 }

@@ -3,7 +3,8 @@
     {
       "id": 1,
       "username": "test",
-      "password": "test"
+      "password": "test",
+      "favoritePosts": [1]
     },
     {
       "id": 2,
@@ -13,13 +14,26 @@
   ],
 
   
-  "comments": [
+  "posts": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "title": "Lorem",
+      "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
+      "numOfFavorties": 0,
+      "commnets": [],
+      "imageUrl": "image1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "TEEEST",
+      "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
+      "numOfFavorties": 50,
+      "commnets": [],
+      "imageUrl": "image2.jpg"
     }
   ],
+
+
   "profile": {
     "name": "typicode"
   }

@@ -10,12 +10,15 @@
     "@types/react-dom": "16.8.4",
     "@types/react-redux": "^7.0.9",
     "@types/react-router-dom": "^4.3.3",
+    "@types/react-router-redux": "^5.0.18",
     "@types/redux": "^3.6.0",
+    "connected-react-router": "^6.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
@@ -41,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/history": "^2.0.45"
   }
 }

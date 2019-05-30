@@ -7,12 +7,16 @@ import { rootReducer } from './reducers/rootReducer';
 import Login from './components/Login';
 import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './sagas/rootSaga';
+import { checkLoginStatus } from './Actions/userActions';
+import Home from './components/Home';
+import { getPosts } from './Actions/postActions';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer,
   applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
-//store.dispatch(login({username: "blaaaaaaaaaa", password: "bgeeeeeeeeeeee"}));
+store.dispatch(checkLoginStatus());
+store.dispatch(getPosts());
 
 class App extends React.Component {
   render() {
@@ -21,7 +25,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div>
             <Navbar></Navbar>
-            <Route path="/"></Route>
+            <Route exact path="/" component={Home}></Route>
             <Route path="/login" component={Login}></Route>
 
           </div>

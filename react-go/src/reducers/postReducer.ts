@@ -1,0 +1,35 @@
+import { Post } from "../models/post";
+import { Action } from "redux";
+import { DISPLAY_POSTS, UPDATE } from "../constants/action-types";
+import { displayPosts, update } from "../Actions/postActions";
+
+interface postsState {
+    posts: Post[]
+}
+
+const initialState : postsState = {
+    posts: [],
+}
+
+export function postReducer(state : postsState = initialState, action : Action){
+    switch(action.type){
+        case DISPLAY_POSTS:{
+            const {posts} = action as displayPosts;
+            //console.log(posts);
+            return{
+                ...state,
+                posts
+            }
+        }
+        case UPDATE:{
+            const {favoritePosts} = action as update;
+            return{
+                ...state,
+                favoritePosts
+            }
+        }
+        default:{
+            return state
+        }
+    }
+}

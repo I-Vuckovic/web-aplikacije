@@ -1,3 +1,14 @@
-.login{
-  padding-top: 70px;
+.addPadding{
+  padding-top: 50px;
+}
+
+.input-field input.error {
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+}
+
+.sticky{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
