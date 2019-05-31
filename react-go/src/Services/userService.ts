@@ -8,6 +8,11 @@ export async function fetchUser(user: User) {
 }
 
 export async function getUser(id: number){
+    try{
     const res = await fetch(`${USERS}?id=${id}`);
     return await res.json();
+    }
+    catch (res) {
+        console.log(res);
+    }
 }

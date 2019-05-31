@@ -1,6 +1,6 @@
 import { Post } from "../models/post";
 import { Action } from "redux";
-import { DISPLAY_POSTS, UPDATE } from "../constants/action-types";
+import { DISPLAY_POSTS, UPDATE, FAILED_REQUEST } from "../constants/action-types";
 import { displayPosts, update } from "../Actions/postActions";
 
 interface postsState {
@@ -21,11 +21,10 @@ export function postReducer(state : postsState = initialState, action : Action){
                 posts
             }
         }
-        case UPDATE:{
-            const {favoritePosts} = action as update;
+        case FAILED_REQUEST: {
             return{
                 ...state,
-                favoritePosts
+                posts: []
             }
         }
         default:{

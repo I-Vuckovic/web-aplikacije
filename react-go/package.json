@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "@types/history": "^2.0.45"
+    "@types/history": "^2.0.45",
+    "redux-devtools-extension": "^2.13.8"
   }
 }

@@ -10,12 +10,13 @@ interface Props {
     userState: any,
     // loogedIn: boolean,
     loginDenied: boolean;
+    failedRequest: false;
     // user: User
     history: any
 }
 
 class Login extends Component<Props> {
-    
+
 
     handleSubmit() {
         this.props.login({
@@ -36,13 +37,22 @@ class Login extends Component<Props> {
         return (
             <div className="container addPadding">
                 <div className="z-depth-1 grey lighten-4 row">
-                    <form className="col s12" method="post"> 
+                    <form className="col s12" method="post">
                         <div className='row'>
-                            <div className='col s12 red-text'>
-                                {
-                                    this.props.userState.user.loginDenied ?
-                                    "Invalid username or password" : ""
-                                }
+                            <div className='col s12'>
+                                <h5 className="red-text">
+                                    {
+                                        this.props.userState.user.loginDenied ?
+                                            "Invalid username or password" : ""
+                                    }
+                                    {
+                                        this.props.failedRequest ?
+                                            setTimeout(() => {
+                                                return "Could not connect to server"
+                                            }, 2000)
+                                             : ""
+                                    }
+                                </h5>
                             </div>
                         </div>
                         <div className='row'>
@@ -71,9 +81,10 @@ class Login extends Component<Props> {
     }
 }
 
-function mapStateToProps(state: userState) {
+function mapStateToProps(state: any) {
     return {
         userState: state,
+        failedRequest: state.user.failedRequest
     }
 }
 

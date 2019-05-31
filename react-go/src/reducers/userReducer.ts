@@ -1,16 +1,21 @@
 import { Action } from "redux";
 import { User } from "../models/user";
-import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS } from "../constants/action-types";
+import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, UPDATE, FAILED_REQUEST } from "../constants/action-types";
 import { loginRequest, loginApproved } from "../Actions/userActions";
+import { update } from "../Actions/postActions";
 
 export interface userState {
     logedIn: boolean;
-    username: string
+    username: string;
+    failedRequest: boolean;
+    favoritePosts: number[];
 }
 
 const initialState: userState = {
     logedIn: false,
-    username: ""
+    username: "",
+    failedRequest: false,
+    favoritePosts: []
 }
 
 
@@ -21,8 +26,11 @@ export function userReducer(state: userState = initialState, action: Action) {
                 return{
                     ...state,
                     logedIn: true,
+                    id: localStorage.getItem("id")!,
+                    username: localStorage.getItem("username")!,
                 }
             }
+            console.log(state);
             return{
                 ...state
             }
@@ -53,7 +61,26 @@ export function userReducer(state: userState = initialState, action: Action) {
                 ...state,
                 logedIn: false,
                 username: "",
-                loginDenied: false
+                loginDenied: false,
+                favoritePosts: []
+            }
+        }
+        case UPDATE:{
+            const {favoritePosts} = action as update;
+            return{
+                ...state,
+                favoritePosts
+            }
+        }
+        case FAILED_REQUEST:{
+            localStorage.clear();
+            return{
+                ...state,
+                logedIn: false,
+                username: "",
+                loginDenied: false,
+                failedRequest: true,
+                favoritePosts: []
             }
         }
         default: {

@@ -10,13 +10,18 @@ import { rootSaga } from './sagas/rootSaga';
 import { checkLoginStatus } from './Actions/userActions';
 import Home from './components/Home';
 import { getPosts } from './Actions/postActions';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { request } from './Actions/gloablActions';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer,
-  applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 sagaMiddleware.run(rootSaga);
-store.dispatch(checkLoginStatus());
-store.dispatch(getPosts());
+
+store.dispatch(request());
+// setTimeout(() => {
+//   store.dispatch(checkLoginStatus());
+//   store.dispatch(getPosts());
+// }, 500);
 
 class App extends React.Component {
   render() {

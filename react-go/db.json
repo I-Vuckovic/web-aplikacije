@@ -1,4 +1,8 @@
-{
+{ 
+  "request": {
+      "connected": "true"
+  },
+  
   "users": [
     {
       "id": 1,
