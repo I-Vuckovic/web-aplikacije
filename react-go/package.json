@@ -15,6 +15,7 @@
     "connected-react-router": "^6.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.8.6",
+    "react-delay-render": "^0.1.2",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",

@@ -1,10 +1,13 @@
 export interface Post {
-    id: number,
+    id?: number,
     title: string,
     imageUrl: string,
     body: string,
-    numOfFavorties: number,
-    comments: Comment[]
+    numOfFavorites: number,
+    comments: Comment[],
+    dateCreated: string,
+    author: string,
+    authorId: number,
 }
 
 export interface Comment{

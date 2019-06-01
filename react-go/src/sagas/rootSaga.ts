@@ -1,40 +1,11 @@
-import { all, takeEvery, take, fork, put } from 'redux-saga/effects';
-import { LOGIN_REQUEST, GET_POSTS, CHECK_LOGIN_STATUS, REQUEST } from '../constants/action-types';
-import { fetchUser, getUser } from '../Services/userService';
-import { loginApproved, loginDenied, checkLoginStatus } from '../Actions/userActions';
-import { fetchPosts, fetchRequest } from '../Services/postService';
-import { displayPosts, update } from '../Actions/postActions';
+import { take, fork, put } from 'redux-saga/effects';
+import { REQUEST, REQUEST_POST } from '../constants/action-types';
+import {  getUser } from '../Services/userService';
+import { checkLoginStatus, updateFavorites } from '../Actions/userActions';
+import { fetchPosts, fetchRequest, fetchPost } from '../Services/postService';
 import { failedRequest } from '../Actions/gloablActions';
-
-
-export function* loginFlow() {
-
-    while (true) {
-        const status = yield makeRequest();
-        if (status == 1) {
-            const request = yield take(LOGIN_REQUEST);
-            const { user } = request;
-            const result = yield fetchUser(user);
-            if (result.length == 0) {
-                yield put(loginDenied());
-            }
-            else {
-                yield put(loginApproved(result[0]));
-
-            }
-        }
-        else{
-            yield put(failedRequest());
-        }
-    }
-}
-
-export function* getPosts() {
-
-    const posts = yield fetchPosts();
-
-    yield put(displayPosts(posts));
-}
+import {loginFlow, addPostToFavorites, removePostFromFavorites} from './userSaga';
+import { getPosts, getIndividualPost, addNewPost, deleteSelectedPost } from './postSaga';
 
 export function* pageRefresh() {
 
@@ -48,12 +19,12 @@ export function* pageRefresh() {
         }
         else {
             
-            yield put(update(user[0].favoritePosts));
+            yield put(updateFavorites(user[0].favoritePosts));
         }
     }
 }
 
-function* makeRequest() {
+export function* makeRequest() {
     const request = yield fetchRequest();
     if (request === undefined) {
         return 0;
@@ -65,6 +36,7 @@ function* makeRequest() {
     // 1 - succesfull connection
 }
 
+
 export function* rootSaga() {
     yield take(REQUEST);
     const status = yield makeRequest();
@@ -72,6 +44,11 @@ export function* rootSaga() {
         yield fork(loginFlow);
         yield fork(getPosts);
         yield fork(pageRefresh);
+        yield fork(addPostToFavorites);
+        yield fork(removePostFromFavorites);
+        yield fork(getIndividualPost);
+        yield fork(addNewPost);
+        yield fork(deleteSelectedPost);
     }
     else {
         yield put(failedRequest());

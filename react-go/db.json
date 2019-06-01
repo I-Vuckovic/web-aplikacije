@@ -1,29 +1,35 @@
-{ 
+{
   "request": {
-      "connected": "true"
+    "connected": "true"
   },
-  
   "users": [
     {
       "id": 1,
       "username": "test",
       "password": "test",
-      "favoritePosts": [1]
+      "moderator": true,
+      "favoritePosts": [
+        3
+      ]
     },
     {
       "id": 2,
       "username": "test2",
-      "password": "test2"
+      "password": "test2",
+      "moderator": false,
+      "favoritePosts": [
+        3,
+        2,
+        1
+      ]
     }
   ],
-
-  
   "posts": [
     {
       "id": 1,
       "title": "Lorem",
       "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
-      "numOfFavorties": 0,
+      "numOfFavorites": 26,
       "commnets": [],
       "imageUrl": "image1.jpg"
     },
@@ -31,13 +37,58 @@
       "id": 2,
       "title": "TEEEST",
       "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
-      "numOfFavorties": 50,
+      "numOfFavorites": 70,
       "commnets": [],
       "imageUrl": "image2.jpg"
+    },
+    {
+      "title": "test3",
+      "body": "fsdaf",
+      "numOfFavorites": 3,
+      "comments": [],
+      "imageUrl": "image1.jpg",
+      "dateCreated": "6/1/2019, 3:33:54 PM",
+      "id": 3
     }
   ],
-
-
+  "news": [
+    {
+      "id": 1,
+      "time": "6/1/2019, 3:44:48 PM",
+      "author": "test",
+      "body": "test published a new post \"How to spray control the AK-47\""
+    },
+    {
+      "time": "6/1/2019, 3:46:01 PM",
+      "author": "test",
+      "body": "test published a new post \"fsadfsafsafsafsda\"",
+      "id": 2
+    },
+    {
+      "time": "6/1/2019, 4:04:15 PM",
+      "author": "test",
+      "body": "test published a new post \"News test\"",
+      "id": 3
+    },
+    {
+      "time": "6/1/2019, 4:28:53 PM",
+      "author": "test",
+      "body": "test published a new post \"fds\"",
+      "id": 4
+    },
+    {
+      "time": "6/1/2019, 4:29:15 PM",
+      "author": "test",
+      "body": "test published a new post \"fewaf\"",
+      "id": 5
+    },
+    {
+      "time": "6/1/2019, 5:18:29 PM",
+      "author": "test",
+      "body": "test published a new post \"Prvi test sa ID-em\"",
+      "id": 6
+    }
+  ],
   "profile": {
     "name": "typicode"
   }

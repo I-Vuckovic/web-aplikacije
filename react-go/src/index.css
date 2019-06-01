@@ -12,3 +12,11 @@
   position: sticky;
   top: 0;
 }
+
+.icon-hover:hover:after {
+  content: 'cancel';
+}
+
+.icon-hover:after {
+  content: 'done';
+}

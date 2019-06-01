@@ -1,21 +1,24 @@
 import { Action } from "redux";
 import { User } from "../models/user";
-import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, UPDATE, FAILED_REQUEST } from "../constants/action-types";
-import { loginRequest, loginApproved } from "../Actions/userActions";
-import { update } from "../Actions/postActions";
+import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, FAILED_REQUEST, UPDATE_FAVORITES } from "../constants/action-types";
+import { loginRequest, loginApproved, updateFavorites } from "../Actions/userActions";
 
 export interface userState {
+    userId: number;
     logedIn: boolean;
     username: string;
     failedRequest: boolean;
     favoritePosts: number[];
+    moderator: boolean;
 }
 
 const initialState: userState = {
+    userId: -1,
     logedIn: false,
     username: "",
     failedRequest: false,
-    favoritePosts: []
+    favoritePosts: [],
+    moderator: false
 }
 
 
@@ -23,14 +26,15 @@ export function userReducer(state: userState = initialState, action: Action) {
     switch (action.type) {
         case CHECK_LOGIN_STATUS: {
             if (localStorage.getItem("id") !== null){
+                const mod = localStorage.getItem("moderator")! === "true" ? true : false;
                 return{
                     ...state,
                     logedIn: true,
-                    id: localStorage.getItem("id")!,
+                    userId: parseInt(localStorage.getItem("id")!),
                     username: localStorage.getItem("username")!,
+                    moderator: mod
                 }
             }
-            console.log(state);
             return{
                 ...state
             }
@@ -40,12 +44,15 @@ export function userReducer(state: userState = initialState, action: Action) {
             localStorage.setItem("username", user.username);
             localStorage.setItem('id', user.id.toString());
             localStorage.setItem("favoritePosts", JSON.stringify(user.favoritePosts));
+            localStorage.setItem("moderator", user.moderator.toString());
             return{
                 ...state,
                 logedIn: true,
                 username: user.username,
                 favoritePosts: user.favoritePosts,
-                loginDenied: false
+                loginDenied: false,
+                userId: user.id,
+                moderator: user.moderator
             }
         }
         case LOGIN_DENIED: {
@@ -59,17 +66,12 @@ export function userReducer(state: userState = initialState, action: Action) {
             localStorage.clear();
             return {
                 ...state,
+                userId: -1,
                 logedIn: false,
                 username: "",
                 loginDenied: false,
-                favoritePosts: []
-            }
-        }
-        case UPDATE:{
-            const {favoritePosts} = action as update;
-            return{
-                ...state,
-                favoritePosts
+                favoritePosts: [],
+                moderator: false
             }
         }
         case FAILED_REQUEST:{
@@ -81,6 +83,13 @@ export function userReducer(state: userState = initialState, action: Action) {
                 loginDenied: false,
                 failedRequest: true,
                 favoritePosts: []
+            }
+        }
+        case UPDATE_FAVORITES: {
+            const { favoritePosts } = action as updateFavorites;
+            return{
+                ...state,
+                favoritePosts
             }
         }
         default: {

@@ -12,6 +12,8 @@ import Home from './components/Home';
 import { getPosts } from './Actions/postActions';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { request } from './Actions/gloablActions';
+import PostPage from './components/PostPage';
+import AddPost from './components/AddPost';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -22,7 +24,7 @@ store.dispatch(request());
 //   store.dispatch(checkLoginStatus());
 //   store.dispatch(getPosts());
 // }, 500);
-
+console.log(new Date());
 class App extends React.Component {
   render() {
     return (
@@ -31,8 +33,9 @@ class App extends React.Component {
           <div>
             <Navbar></Navbar>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/login" component={Login}></Route>
-
+            <Route exact path="/login" component={Login}></Route>
+            <Route path="/post/:postId" component={PostPage}></Route>
+            <Route path="/addpost" component={AddPost}></Route>
           </div>
         </BrowserRouter>
       </Provider>

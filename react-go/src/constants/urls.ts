@@ -1,5 +1,9 @@
-export const USERS = "http://localhost:3001/users";
+const URL = "http://localhost:3001"
 
-export const POSTS = "http://localhost:3001/posts";
+export const USERS = `${URL}/users`;
 
-export const REQUESTURL = "http://localhost:3001/request"
+export const POSTS = `${URL}/posts`;
+
+export const REQUESTURL = `${URL}/request`;
+
+export const NEWS = `${URL}/news`;

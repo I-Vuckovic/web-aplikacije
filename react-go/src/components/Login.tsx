@@ -46,10 +46,8 @@ class Login extends Component<Props> {
                                             "Invalid username or password" : ""
                                     }
                                     {
-                                        this.props.failedRequest ?
-                                            setTimeout(() => {
-                                                return "Could not connect to server"
-                                            }, 2000)
+                                        this.props.failedRequest ?   
+                                             "Could not connect to server"
                                              : ""
                                     }
                                 </h5>
