@@ -1,7 +1,7 @@
 import { Post } from "../models/post";
 import { Action } from "redux";
-import { DISPLAY_POSTS,  FAILED_REQUEST, UPDATE_POST, DISPLAY_INDIVIDUAL_POST, DISPLAY_NEWS, REQUEST_POST, ADDED_NEW_COMMENT } from "../constants/action-types";
-import { displayPosts, updatePost, displayIndividualPost, displayNews, requestPost, addedNewComment,  } from "../Actions/postActions";
+import { DISPLAY_POSTS,  FAILED_REQUEST, UPDATE_POST, DISPLAY_INDIVIDUAL_POST, DISPLAY_NEWS, REQUEST_POST, ADDED_NEW_COMMENT, ADDED_NEW_POST, DELETED_POST } from "../constants/action-types";
+import { displayPosts, updatePost, displayIndividualPost, displayNews, requestPost, addedNewComment, addedNewPost, deletedPost,  } from "../Actions/postActions";
 import { News } from "../models/news";
 import { POINT_CONVERSION_HYBRID } from "constants";
 
@@ -26,9 +26,10 @@ export function postReducer(state : postsState = initialState, action : Action){
         }
         case DISPLAY_NEWS: {
             const {news} = action as displayNews;
+            const slicedNews = news.reverse().slice(0,5);
             return{
                 ...state,
-                news: news.map(item=>item).reverse()
+                news: slicedNews
             }
         }
         case FAILED_REQUEST: {
@@ -75,6 +76,24 @@ export function postReducer(state : postsState = initialState, action : Action){
                 post: state.posts.filter((post:Post) => post.id == postId)[0],
             }
 
+        }
+        case ADDED_NEW_POST: {
+            const {post,news} = action as addedNewPost;
+            const newPosts = [ post, ...state.posts];
+            const newNews = [ news ,...state.news];
+            return{
+                ...state,
+                posts: newPosts,
+                news: newNews
+            }
+        }
+        case DELETED_POST:{
+            const {postId, news} = action as deletedPost;
+            return{
+                ...state,
+                posts: state.posts.filter((post:Post) => post.id !== postId),
+                news: [news , ...state.news]
+            }
         }
         default:{
             return state

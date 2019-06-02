@@ -1,3 +1,4 @@
+
 .addPadding{
   padding-top: 50px;
 }
@@ -7,6 +8,11 @@
   box-shadow: 0 1px 0 0 red;
 }
 
+.error{
+  border-bottom: 1px solid red;
+  box-shadow: 0 1px 0 0 red;
+  border: red;
+}
 .sticky{
   position: -webkit-sticky;
   position: sticky;
@@ -24,3 +30,13 @@
 .paddingBottom{
   padding-bottom: 30px;
 }
+
+.marginBottom{
+  margin-bottom: 50px;
+}
+
+textarea{
+  height: 300px;
+  resize: none;
+}
+

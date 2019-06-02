@@ -15,6 +15,7 @@ import { request } from './Actions/gloablActions';
 import PostPage from './components/PostPage';
 import AddPost from './components/AddPost';
 import ProfilePage from './components/ProfilePage';
+import Footer from './components/Footer';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -38,6 +39,7 @@ class App extends React.Component {
             <Route path="/post/:postId" component={PostPage}></Route>
             <Route path="/addpost" component={AddPost}></Route>
             <Route path="/profilepage" component={ProfilePage}></Route>
+            <Footer></Footer>
           </div>
         </BrowserRouter>
       </Provider>

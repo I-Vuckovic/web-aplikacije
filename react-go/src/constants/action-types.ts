@@ -17,6 +17,8 @@ export const REQUEST_POST = "REQUEST_POST";
 export const DISPLAY_INDIVIDUAL_POST = "DISPLAY_INDIVIDUAL_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
+export const ADDED_NEW_POST = "ADDED_NEW_POST";
+export const DELETED_POST = "DELETED_POST";
 //NEWS ACTION - implenetations are within "post actions"
 export const GET_NEWS = "GET_NEWS"; // This action may not be needed at all
 export const DISPLAY_NEWS = "DISPLAY_NEWS";

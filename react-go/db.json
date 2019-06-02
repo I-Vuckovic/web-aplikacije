@@ -230,6 +230,60 @@
       "author": "test",
       "body": "test published a new post \"Prvi test sa ID-em\"",
       "id": 6
+    },
+    {
+      "time": "6/2/2019, 8:59:42 PM",
+      "author": "test",
+      "body": " published a new post \"New battle royale mode in CS:GO\"",
+      "id": 7
+    },
+    {
+      "time": "6/2/2019, 9:04:22 PM",
+      "author": "test",
+      "body": " published a new post \"New Danger zone mode in CS:GO\"",
+      "id": 8
+    },
+    {
+      "time": "6/2/2019, 9:05:26 PM",
+      "author": "test",
+      "body": " published a new post \"New Danger zone mode in CS:GO\"",
+      "id": 9
+    },
+    {
+      "time": "6/2/2019, 9:24:08 PM",
+      "author": "test",
+      "body": " published a new post \"fsd\"",
+      "id": 10
+    },
+    {
+      "time": "6/2/2019, 9:26:35 PM",
+      "author": "test",
+      "body": " published a new post \"f\"",
+      "id": 11
+    },
+    {
+      "time": "6/2/2019, 9:32:01 PM",
+      "author": "test",
+      "body": " published a new post \"Da li ce automatski da se azurira\"",
+      "id": 12
+    },
+    {
+      "time": "6/2/2019, 9:32:46 PM",
+      "author": "test",
+      "body": " published a new post \"Htelo je ali sam morao da obrnem redosled\"",
+      "id": 13
+    },
+    {
+      "time": "6/2/2019, 9:43:00 PM",
+      "author": "test",
+      "body": " published a new post \"Ajde da vidimo jel se sve lepo azurirja\"",
+      "id": 14
+    },
+    {
+      "time": "6/2/2019, 9:43:00 PM",
+      "author": "test",
+      "body": " deleted the post  \"Ajde da vidimo jel se sve lepo azurirja\"",
+      "id": 15
     }
   ],
   "profile": {

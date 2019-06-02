@@ -40,7 +40,7 @@ class PostPage extends Component<Props> {
         }
         return (
             <div className="container addPadding">
-                <h2 className="red-text">{this.props.post.title}</h2>
+                <h2 className="">{this.props.post.title}</h2>
                 <p>{this.props.post.body}</p>
                 {
                     this.props.post.authorId === this.props.userId ?
