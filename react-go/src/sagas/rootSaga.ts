@@ -5,7 +5,7 @@ import { checkLoginStatus, updateFavorites } from '../Actions/userActions';
 import { fetchPosts, fetchRequest, fetchPost } from '../Services/postService';
 import { failedRequest } from '../Actions/gloablActions';
 import {loginFlow, addPostToFavorites, removePostFromFavorites} from './userSaga';
-import { getPosts, getIndividualPost, addNewPost, deleteSelectedPost } from './postSaga';
+import { getPosts, getIndividualPost, addNewPost, deleteSelectedPost, addComment } from './postSaga';
 
 export function* pageRefresh() {
 
@@ -46,9 +46,10 @@ export function* rootSaga() {
         yield fork(pageRefresh);
         yield fork(addPostToFavorites);
         yield fork(removePostFromFavorites);
-        yield fork(getIndividualPost);
+        //yield fork(getIndividualPost); //better solution found thourgh postreducer
         yield fork(addNewPost);
         yield fork(deleteSelectedPost);
+        yield fork(addComment);
     }
     else {
         yield put(failedRequest());

@@ -1,7 +1,8 @@
 import { Action } from "redux";
-import { GET_POSTS, DISPLAY_POSTS, UPDATE_POST, REQUEST_POST, DISPLAY_INDIVIDUAL_POST, ADD_POST, GET_NEWS, DISPLAY_NEWS, DELETE_POST } from "../constants/action-types";
+import { GET_POSTS, DISPLAY_POSTS, UPDATE_POST, REQUEST_POST, DISPLAY_INDIVIDUAL_POST, ADD_POST, GET_NEWS, DISPLAY_NEWS, DELETE_POST, ADD_COMMENT, ADDED_NEW_COMMENT } from "../constants/action-types";
 import { Post } from "../models/post";
 import { News } from "../models/news";
+import { Comment } from "../models/comment";
 
 // #region interfaces
 
@@ -88,7 +89,7 @@ export function deletePost(postId: number): deletePost{
 
 // #endregion
 
-//NEWS 
+// #region NEWS 
 
 export interface getNews extends Action{
 
@@ -110,3 +111,35 @@ export function displayNews(news: News[]): displayNews{
         news
     }
 }
+
+// #endregion
+
+// #region COMMENTS
+
+export interface addComment extends Action{
+    postId: number
+    comment: Comment
+}
+
+export function addComment(postId: number, comment: Comment): addComment{
+    return{
+        type: ADD_COMMENT,
+        postId,
+        comment
+    }
+}
+
+export interface addedNewComment extends Action{
+    postId: number,
+    comment: Comment
+}
+
+export function addedNewComment(postId: number, comment: Comment): addedNewComment{
+    return{
+        type: ADDED_NEW_COMMENT,
+        postId,
+        comment
+    }
+}
+
+// #endregion

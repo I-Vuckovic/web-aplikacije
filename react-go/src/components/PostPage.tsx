@@ -3,6 +3,7 @@ import { Post } from '../models/post';
 import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { requestPost, deletePost } from '../Actions/postActions';
+import CommentSection from './CommentSection';
 
 interface Props {
     post: Post,
@@ -18,15 +19,22 @@ class PostPage extends Component<Props> {
     componentDidMount() {
         setTimeout(() => {
             this.props.requestPost(this.props.match.params.postId); 
+            if (this.props.post === undefined) {
+                (document.getElementById("errorMessage") as HTMLHeadingElement).innerHTML = "Failed to load post, check your internet connection";
+            }
         }, 500);
+
+    }
+
+    componentWillUnmount(){
         
     }
-    
+
     render() {
         if (this.props.post === undefined) {
             return (
                 <div className="container addPadding">
-                    <h3 className="red-text">Failed to load post, check your internet connection</h3>
+                    <h3 id="errorMessage" className="red-text"></h3>
                 </div>
             )
         }
@@ -36,28 +44,29 @@ class PostPage extends Component<Props> {
                 <p>{this.props.post.body}</p>
                 {
                     this.props.post.authorId === this.props.userId ?
-                    <div onClick={() => {
-                        this.props.deletePost(this.props.post.id);
-                        this.props.history.push("/");
-                    }} className="btn indigo">Delete this post </div>:
-                    null
+                        <div onClick={() => {
+                            this.props.deletePost(this.props.post.id);
+                            this.props.history.push("/");
+                        }} className="btn indigo">Delete this post </div> :
+                        null
                 }
+                <CommentSection postId={this.props.post.id }></CommentSection>
             </div>
         )
     }
 }
 
-function mapStateToProps(state: any){
-    return{
+function mapStateToProps(state: any) {
+    return {
         post: state.post.post,
         userId: state.user.userId
     }
 }
 
-function dispatchToProps(dispatch: Dispatch<Action>){
-    return{
+function dispatchToProps(dispatch: Dispatch<Action>) {
+    return {
         requestPost: (postId: number) => dispatch(requestPost(postId)),
-        deletePost: (postId:number) => dispatch(deletePost(postId))
+        deletePost: (postId: number) => dispatch(deletePost(postId))
     }
 }
 

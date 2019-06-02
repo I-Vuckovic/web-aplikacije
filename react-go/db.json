@@ -9,6 +9,8 @@
       "password": "test",
       "moderator": true,
       "favoritePosts": [
+        1,
+        2,
         3
       ]
     },
@@ -18,9 +20,7 @@
       "password": "test2",
       "moderator": false,
       "favoritePosts": [
-        3,
-        2,
-        1
+        3
       ]
     }
   ],
@@ -30,7 +30,23 @@
       "title": "Lorem",
       "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
       "numOfFavorites": 26,
-      "commnets": [],
+      "comments": [
+        {
+          "username": "test",
+          "body": "test",
+          "dateCreated": "6/2/2019, 6:05:25 PM"
+        },
+        {
+          "username": "test",
+          "body": "One more test",
+          "dateCreated": "6/2/2019, 6:05:46 PM"
+        },
+        {
+          "username": "test",
+          "body": "And a third test",
+          "dateCreated": "6/2/2019, 6:36:28 PM"
+        }
+      ],
       "imageUrl": "image1.jpg"
     },
     {
@@ -38,14 +54,141 @@
       "title": "TEEEST",
       "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
       "numOfFavorites": 70,
-      "commnets": [],
+      "comments": [
+        {
+          "username": "test",
+          "body": "fdasfsadf",
+          "dateCreated": "6/2/2019, 6:41:42 PM"
+        }
+      ],
       "imageUrl": "image2.jpg"
     },
     {
       "title": "test3",
       "body": "fsdaf",
       "numOfFavorites": 3,
-      "comments": [],
+      "comments": [
+        {
+          "username": "test",
+          "body": "fdsadf",
+          "dateCreated": "6/2/2019, 6:40:27 PM"
+        },
+        {
+          "username": "test",
+          "body": "fsdafsda",
+          "dateCreated": "6/2/2019, 6:40:56 PM"
+        },
+        {
+          "username": "test2",
+          "body": "Test 2 je reko nesto",
+          "dateCreated": "6/2/2019, 6:42:11 PM"
+        },
+        {
+          "username": "test",
+          "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+          "dateCreated": "6/2/2019, 6:50:07 PM"
+        },
+        {
+          "username": "test",
+          "body": "test sa callbackom (valjda je callback?)",
+          "dateCreated": "6/2/2019, 7:02:18 PM"
+        },
+        {
+          "username": "test",
+          "body": "fsda",
+          "dateCreated": "6/2/2019, 7:04:40 PM"
+        },
+        {
+          "username": "test",
+          "body": "fdsafasdfas",
+          "dateCreated": "6/2/2019, 7:08:29 PM"
+        },
+        {
+          "username": "test",
+          "body": "Ae sad da vidimo jel se razlikuju u konzoli",
+          "dateCreated": "6/2/2019, 7:17:28 PM"
+        },
+        {
+          "username": "test",
+          "body": "sta se bre desava?",
+          "dateCreated": "6/2/2019, 7:22:19 PM"
+        },
+        {
+          "username": "test",
+          "body": "dal ce radi?",
+          "dateCreated": "6/2/2019, 7:25:03 PM"
+        },
+        {
+          "username": "test",
+          "body": "sto bre puca?",
+          "dateCreated": "6/2/2019, 7:25:42 PM"
+        },
+        {
+          "username": "test",
+          "body": "a sad jel ce pukne?",
+          "dateCreated": "6/2/2019, 7:26:11 PM"
+        },
+        {
+          "username": "test",
+          "body": "sta se bre desava ovde",
+          "dateCreated": "6/2/2019, 7:46:07 PM"
+        },
+        {
+          "username": "test",
+          "body": "e ponovo",
+          "dateCreated": "6/2/2019, 7:46:33 PM"
+        },
+        {
+          "username": "test",
+          "body": "ajde molim te radi",
+          "dateCreated": "6/2/2019, 7:48:38 PM"
+        },
+        {
+          "username": "test",
+          "body": "sta li ti je be",
+          "dateCreated": "6/2/2019, 7:50:45 PM"
+        },
+        {
+          "username": "test",
+          "body": "zar je stvarno trebalo [0]?",
+          "dateCreated": "6/2/2019, 7:52:20 PM"
+        },
+        {
+          "username": "test",
+          "body": "aaaaaaaaaaaaaaaaaaa",
+          "dateCreated": "6/2/2019, 7:53:07 PM"
+        },
+        {
+          "username": "test",
+          "body": "bbbbbbbbbbbbbbbbbbbbbbb",
+          "dateCreated": "6/2/2019, 7:53:56 PM"
+        },
+        {
+          "username": "test",
+          "body": "ffffffffffffff",
+          "dateCreated": "6/2/2019, 7:54:33 PM"
+        },
+        {
+          "username": "test",
+          "body": "AAAAAAAA OVO RADIIIIIIIIIIIIII",
+          "dateCreated": "6/2/2019, 7:54:40 PM"
+        },
+        {
+          "username": "test",
+          "body": "I TOOOOO BLIZU LEPE PESMEEEEEE",
+          "dateCreated": "6/2/2019, 7:54:47 PM"
+        },
+        {
+          "username": "test2",
+          "body": "ae sada test 2 nesto da kaze ",
+          "dateCreated": "6/2/2019, 7:57:48 PM"
+        },
+        {
+          "username": "test2",
+          "body": "To je to bajco",
+          "dateCreated": "6/2/2019, 7:57:52 PM"
+        }
+      ],
       "imageUrl": "image1.jpg",
       "dateCreated": "6/1/2019, 3:33:54 PM",
       "id": 3

@@ -17,10 +17,14 @@ export const REQUEST_POST = "REQUEST_POST";
 export const DISPLAY_INDIVIDUAL_POST = "DISPLAY_INDIVIDUAL_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
-//NEWS ACTION 
+//NEWS ACTION - implenetations are within "post actions"
 export const GET_NEWS = "GET_NEWS"; // This action may not be needed at all
 export const DISPLAY_NEWS = "DISPLAY_NEWS";
 
 //GLOBAL ACTIONS
 export const FAILED_REQUEST = "FAILED_REQUEST";
 export const REQUEST = "REQUEST";
+
+//COMMENT ACTIONS - implementations are within "post actions"
+export const ADD_COMMENT = "ADD_COMMENT";
+export const ADDED_NEW_COMMENT = "ADDED_NEW_COMMENT";

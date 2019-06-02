@@ -46,7 +46,7 @@ class Navbar extends Component<Props> {
                                             null
                                     }
                                     <li>
-                                        <li><Link to="/Treci link" className="waves-effect waves-light btn indigo"> <i className="material-icons left">account_circle</i> {this.props.username}</Link></li>
+                                        <li><Link to="/profilepage" className="waves-effect waves-light btn indigo"> <i className="material-icons left">account_circle</i> {this.props.username}</Link></li>
                                     </li>
                                     <li>
 

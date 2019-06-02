@@ -14,6 +14,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { request } from './Actions/gloablActions';
 import PostPage from './components/PostPage';
 import AddPost from './components/AddPost';
+import ProfilePage from './components/ProfilePage';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route exact path="/login" component={Login}></Route>
             <Route path="/post/:postId" component={PostPage}></Route>
             <Route path="/addpost" component={AddPost}></Route>
+            <Route path="/profilepage" component={ProfilePage}></Route>
           </div>
         </BrowserRouter>
       </Provider>

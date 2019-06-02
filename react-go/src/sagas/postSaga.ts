@@ -1,7 +1,7 @@
-import { displayPosts, displayIndividualPost, displayNews  } from '../Actions/postActions';
+import { displayPosts, displayIndividualPost, displayNews, addedNewComment  } from '../Actions/postActions';
 import { take, fork, put } from 'redux-saga/effects';
-import { fetchPosts, deletePost, fetchPost, addPost_POST, addNews, fetchNews } from '../Services/postService';
-import { REQUEST_POST, ADD_POST, DELETE_POST } from '../constants/action-types';
+import { fetchPosts, deletePost, fetchPost, addPost_POST, addNews, fetchNews, addCommentToPost } from '../Services/postService';
+import { REQUEST_POST, ADD_POST, DELETE_POST, ADD_COMMENT } from '../constants/action-types';
 import { News } from '../models/news';
 
 export function* getPosts() {
@@ -42,9 +42,18 @@ export function* addNewPost(){
 export function* deleteSelectedPost(){
 
     while(true){
-
         const request = yield take(DELETE_POST);
         const {postId} = request;
         yield deletePost(postId);
+    }
+}
+
+export function* addComment(){
+
+    while(true){
+        const request = yield take(ADD_COMMENT);
+        const {postId, comment} = request;
+        yield addCommentToPost(postId, comment);
+        yield put(addedNewComment(postId, comment));
     }
 }

@@ -2,6 +2,7 @@ import { POSTS, REQUESTURL, USERS, NEWS } from "../constants/urls";
 import { Post } from "../models/post";
 import { News } from "../models/news";
 import { async } from "q";
+import { Comment } from "../models/comment";
 
 export async function fetchPosts() {
     try {
@@ -75,4 +76,19 @@ export async function deletePost(postId:number){
         method: "DELETE"
     });
     return await res.json();
+}
+
+export function addCommentToPost(postId:number , comment: Comment){
+    return fetch(`${POSTS}/${postId}`)
+    .then(res => res.json())
+    .then(res => {
+        res.comments = [...res.comments, comment];
+        return fetch(`${POSTS}/${postId}`, {
+            method: "PUT",
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(res)
+        })
+    })
 }

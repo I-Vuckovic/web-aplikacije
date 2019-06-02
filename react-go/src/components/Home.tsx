@@ -53,7 +53,7 @@ class Home extends Component<Props> {
                 <div className="container addPadding">
                     <div className="row" >
                         <ul className="collection with-header col s12 m4 right indigo ">
-                            <li className="collection-header indigo "><h3>News</h3></li>
+                            <li className="collection-header indigo white-text"><h5>News</h5></li>
                             {
                                 this.props.news.map((news:News) => 
                                     <li className="collection-item">
