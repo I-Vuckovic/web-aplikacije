@@ -3,7 +3,6 @@ import { Action } from "redux";
 import { DISPLAY_POSTS,  FAILED_REQUEST, UPDATE_POST, DISPLAY_INDIVIDUAL_POST, DISPLAY_NEWS, REQUEST_POST, ADDED_NEW_COMMENT, ADDED_NEW_POST, DELETED_POST } from "../constants/action-types";
 import { displayPosts, updatePost, displayIndividualPost, displayNews, requestPost, addedNewComment, addedNewPost, deletedPost,  } from "../Actions/postActions";
 import { News } from "../models/news";
-import { POINT_CONVERSION_HYBRID } from "constants";
 
 interface postsState {
     posts: Post[]

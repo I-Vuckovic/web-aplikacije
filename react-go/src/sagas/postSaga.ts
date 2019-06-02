@@ -33,9 +33,10 @@ export function* addNewPost(){
             author: post.author,
             body: ` published a new post "${post.title}"`
         }
-        yield addPost_POST(post);
+        const newPost = yield addPost_POST(post);
+        
         yield addNews(news);
-        yield put(addedNewPost(post, news));
+        yield put(addedNewPost(newPost, news));
 
     }
 }

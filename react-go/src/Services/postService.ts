@@ -48,7 +48,7 @@ export function addPost_POST(post: Post){
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(post)
-    })
+    }).then(res => res.json())
 }
 
 export function addNews(news: News){

@@ -20,6 +20,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-router-redux": "^4.0.8",
+    "react-router-scroll-top": "^0.1.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",

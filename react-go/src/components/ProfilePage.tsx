@@ -77,7 +77,7 @@ class ProfilePage extends Component<Props, State> {
                     {
                         this.state.filteredPosts === null ?
                             ""
-                            :  (this.state.filteredPosts!.map((post: Post) =>
+                            :  (this.state.filteredPosts!.reverse().map((post: Post) =>
                             <Link to={`/post/${post.id}`} className="collection-item" style={{ textDecoration: 'none' }}>{`${post.title}`}</Link>))
                     }
                 </ul>

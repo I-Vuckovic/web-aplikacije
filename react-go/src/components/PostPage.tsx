@@ -11,23 +11,29 @@ interface Props {
     match: any,
     userId: number,
     deletePost: Function,
-    history: any
+    history: any,
+    allPosts: Post[]
 }
 
 class PostPage extends Component<Props> {
 
     componentDidMount() {
-        setTimeout(() => {
-            this.props.requestPost(this.props.match.params.postId); 
-            if (this.props.post === undefined) {
-                (document.getElementById("errorMessage") as HTMLHeadingElement).innerHTML = "Failed to load post, check your internet connection";
-            }
-        }, 500);
+        if (this.props.allPosts.length === 0) {
+            setTimeout(() => {
+                this.props.requestPost(this.props.match.params.postId);
+                if (this.props.post === undefined) {
+                    (document.getElementById("errorMessage") as HTMLHeadingElement).innerHTML = "Failed to load post, check your internet connection";
+                }
+            }, 1000);
+        }
+        else{
+            this.props.requestPost(this.props.match.params.postId);
+        }
 
     }
 
-    componentWillUnmount(){
-        
+    componentWillUnmount() {
+
     }
 
     render() {
@@ -50,7 +56,7 @@ class PostPage extends Component<Props> {
                         }} className="btn indigo">Delete this post </div> :
                         null
                 }
-                <CommentSection postId={this.props.post.id }></CommentSection>
+                <CommentSection postId={this.props.post.id}></CommentSection>
             </div>
         )
     }
@@ -59,7 +65,8 @@ class PostPage extends Component<Props> {
 function mapStateToProps(state: any) {
     return {
         post: state.post.post,
-        userId: state.user.userId
+        userId: state.user.userId,
+        allPosts: state.post.posts
     }
 }
 
