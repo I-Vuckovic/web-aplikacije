@@ -45,6 +45,7 @@ export function postReducer(state : postsState = initialState, action : Action){
             return {
                 ...state,
                 posts,
+                post
             }
         }
         case DISPLAY_INDIVIDUAL_POST: {
