@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { User } from "../models/user";
-import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, FAILED_REQUEST, UPDATE_FAVORITES } from "../constants/action-types";
+import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, FAILED_REQUEST, UPDATE_FAVORITES, USERNAME_TAKEN, REGISTER_APPROVED } from "../constants/action-types";
 import { loginRequest, loginApproved, updateFavorites } from "../Actions/userActions";
 
 export interface userState {
@@ -43,7 +43,7 @@ export function userReducer(state: userState = initialState, action: Action) {
         case LOGIN_APPROVED: {
             const {user} = action as loginApproved;
             localStorage.setItem("username", user.username);
-            localStorage.setItem('id', user.id.toString());
+            localStorage.setItem('id', user.id!.toString());
             localStorage.setItem("favoritePosts", JSON.stringify(user.favoritePosts));
             localStorage.setItem("moderator", user.moderator.toString());
             return{
@@ -52,7 +52,7 @@ export function userReducer(state: userState = initialState, action: Action) {
                 username: user.username,
                 favoritePosts: user.favoritePosts,
                 loginDenied: false,
-                userId: user.id,
+                userId: user.id!,
                 moderator: user.moderator
             }
         }
@@ -91,6 +91,18 @@ export function userReducer(state: userState = initialState, action: Action) {
             return{
                 ...state,
                 favoritePosts
+            }
+        }
+        case USERNAME_TAKEN: {
+            return{
+                ...state,
+                usernameTaken: true
+            }
+        }
+        case REGISTER_APPROVED: {
+            return{
+                ...state,
+                usernameTaken: false,
             }
         }
         default: {

@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES, UPDATE_FAVORITES } from "../constants/action-types";
+import { LOGIN_REQUEST, LOGIN_APPROVED, LOGIN_DENIED, LOGOUT, CHECK_LOGIN_STATUS, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES, UPDATE_FAVORITES, REGISTER, USERNAME_TAKEN, REGISTER_APPROVED } from "../constants/action-types";
 import { User } from "../models/user";
 import { Action } from "redux";
 
@@ -36,6 +36,18 @@ export interface removeFromFavorites extends Action{
 
 export interface updateFavorites extends Action{
     favoritePosts: number[];
+}
+
+export interface register extends Action{
+    user: User
+}
+
+export interface usernameTaken extends Action{
+
+}
+
+export interface registerApproved extends Action{
+
 }
 
 // #endregion
@@ -94,6 +106,25 @@ export function updateFavorites(favoritePosts: number[] ) :updateFavorites{
     return{
         type: UPDATE_FAVORITES,
         favoritePosts
+    }
+}
+
+export function register(user: User): register{
+    return{
+        type: REGISTER,
+        user
+    }
+}
+
+export function usernameTaken() :usernameTaken{
+    return{
+        type: USERNAME_TAKEN
+    }
+}
+
+export function registerApproved(): registerApproved{
+    return{
+        type: REGISTER_APPROVED
     }
 }
 

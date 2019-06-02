@@ -17,6 +17,7 @@ import AddPost from './components/AddPost';
 import ProfilePage from './components/ProfilePage';
 import Footer from './components/Footer';
 import ScrollToTop from 'react-router-scroll-top'
+import Register from './components/Register';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
@@ -40,6 +41,7 @@ class App extends React.Component {
               <Route path="/post/:postId" component={PostPage}></Route>
               <Route path="/addpost" component={AddPost}></Route>
               <Route path="/profilepage" component={ProfilePage}></Route>
+              <Route path="/register" component={Register}></Route>
               <Footer></Footer>
             </ScrollToTop>
         </BrowserRouter>

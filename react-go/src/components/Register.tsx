@@ -1,40 +1,38 @@
-import React, { Component, Dispatch } from 'react'
-import { userState } from '../reducers/userReducer';
-import { User } from '../models/user';
+import React, { Component } from 'react'
+import { Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
-import { Action } from 'redux';
-import { loginRequest } from '../Actions/userActions';
-import { Link } from 'react-router-dom';
+import { User } from '../models/user';
+import { register } from '../Actions/userActions';
 
 interface Props {
-    login: Function,
-    userState: any,
-    // loogedIn: boolean,
-    loginDenied: boolean;
-    failedRequest: false;
-    // user: User
-    history: any
+    failedRequest: boolean;
+    register: Function;
+    history: any,
+    usernameTaken: boolean
 }
 
-class Login extends Component<Props> {
+class Register extends Component<Props> {
 
-
-    handleSubmit() {
-        this.props.login({
+    handelSubmit() {
+        const newUser: User = {
+            moderator: (document.getElementById("registerAsMod") as HTMLInputElement).checked,
+            favoritePosts: [],
             username: (document.getElementById("username") as HTMLInputElement).value,
             password: (document.getElementById("password") as HTMLInputElement).value,
-        })
+        }
+
+        this.props.register(newUser);
+
         setTimeout(() => {
-            if (this.props.userState.user.logedIn == true) {
+            if (this.props.usernameTaken == false) {
                 this.props.history.push("/");
             }
-        }, 500);
 
+        }, 700);
 
     }
 
     render() {
-
         return (
             <div className="container addPadding">
                 <div className="z-depth-1 grey lighten-4 row">
@@ -43,39 +41,39 @@ class Login extends Component<Props> {
                             <div className='col s12'>
                                 <h5 className="red-text">
                                     {
-                                        this.props.userState.user.loginDenied ?
-                                            "Invalid username or password" : ""
+                                        this.props.usernameTaken ?
+                                            "Username is already taken please try another one" : ""
                                     }
                                     {
-                                        this.props.failedRequest ?   
-                                             "Could not connect to server"
-                                             : ""
+                                        this.props.failedRequest ?
+                                            "Could not connect to server"
+                                            : ""
                                     }
                                 </h5>
                             </div>
                         </div>
                         <div className='row'>
                             <div className='input-field col s12'>
-                                <input className={this.props.userState.user.loginDenied ? "error" : ""} type='text' name='username' id='username' />
+                                <input type='text' name='username' id='username' />
                                 <label>Username</label>
                             </div>
                         </div>
                         <div className='row'>
                             <div className='input-field col s12'>
-                                <input className={this.props.userState.user.loginDenied ? "error" : ""} type='password' name='password' id='password' />
+                                <input type='password' name='password' id='password' />
                                 <label>Password</label>
                             </div>
                         </div>
+                        <label className="marginBottom">
+                            <input type="checkbox" className="filled-in" id="registerAsMod"></input>
+                            <span> Moderator? </span>
+                        </label>
                         <br />
                         <div className='row'>
                             <button onClick={(event) => {
                                 event.preventDefault();
-                                this.handleSubmit()
-                            }} name='btn_login' className='col s12 btn btn-large waves-effect indigo'>Login</button>
-                        </div>
-                        <div className="row center">
-                            <div>Don't have an account? </div>
-                            <Link to="/register" className="btn indigo">Register</Link>
+                                this.handelSubmit();
+                            }} name='btn_login' className='col s12 btn btn-large waves-effect indigo'>Register</button>
                         </div>
                     </form>
                 </div>
@@ -86,15 +84,16 @@ class Login extends Component<Props> {
 
 function mapStateToProps(state: any) {
     return {
-        userState: state,
-        failedRequest: state.user.failedRequest
+        failedRequest: state.user.failedRequest,
+        usernameTaken: state.user.usernameTaken
     }
 }
 
 function dispatchToProps(dispatch: Dispatch<Action>) {
     return {
-        login: (user: User) => dispatch(loginRequest(user))
+        register: (user: User) => dispatch(register(user)),
     }
 }
 
-export default connect(mapStateToProps, dispatchToProps)(Login);
+export default connect(mapStateToProps, dispatchToProps)(Register);
+

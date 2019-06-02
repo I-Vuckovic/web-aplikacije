@@ -8,6 +8,12 @@ export async function fetchUser(user: User) {
         
 }
 
+export async function fetchUserByUsername(username: string) {
+    const res = await fetch(`${USERS}?username=${username}`);
+    return await res.json();
+        
+}
+
 export function addToFavorites(postId: number, userId: number) {
     try {
         return fetch(`${USERS}/${userId}`)
@@ -58,4 +64,14 @@ export async function getUser(id: number){
     catch (res) {
         console.log(res);
     }
+}
+
+export function registerUser(user:User){
+    return fetch(USERS, {
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    }).then(res => res.json())
 }

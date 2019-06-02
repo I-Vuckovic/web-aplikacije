@@ -10,7 +10,9 @@
       "moderator": true,
       "favoritePosts": [
         null,
-        4
+        4,
+        5,
+        1
       ]
     },
     {
@@ -23,6 +25,38 @@
         4,
         1
       ]
+    },
+    {
+      "moderator": true,
+      "favoritePosts": [
+        3
+      ],
+      "username": "test3",
+      "password": "test3",
+      "id": 3
+    },
+    {
+      "moderator": false,
+      "favoritePosts": [],
+      "username": "test4",
+      "password": "test4",
+      "id": 4
+    },
+    {
+      "moderator": false,
+      "favoritePosts": [
+        5
+      ],
+      "username": "test5",
+      "password": "test5",
+      "id": 5
+    },
+    {
+      "moderator": false,
+      "favoritePosts": [],
+      "username": "test6",
+      "password": "test6",
+      "id": 6
     }
   ],
   "posts": [
@@ -30,7 +64,7 @@
       "id": 1,
       "title": "Lorem",
       "body": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, ex unde omnis iure excepturi eos? Ratione molestias, doloribus veniam numquam iste dolorem cum veritatis id at eaque quasi consequuntur repudiandae!",
-      "numOfFavorites": 26,
+      "numOfFavorites": 27,
       "comments": [
         {
           "username": "test",
@@ -77,7 +111,7 @@
     {
       "title": "test3",
       "body": "fsdaf",
-      "numOfFavorites": 2,
+      "numOfFavorites": 3,
       "comments": [
         {
           "username": "test",
@@ -207,7 +241,7 @@
     {
       "title": "New Danger zone mode in CS:GO",
       "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris metus mauris, convallis at accumsan ut, cursus eu neque. Nullam cursus mollis urna varius dapibus. Nunc tellus leo, eleifend quis odio nec, viverra volutpat justo. Mauris commodo tellus eu augue tempus vulputate. Nunc quam mi, cursus non lorem non, commodo efficitur felis. Ut dapibus sollicitudin nulla sit amet ultricies. Morbi ullamcorper rutrum elit, vel laoreet risus mattis sit amet. Suspendisse potenti. Aliquam sagittis in orci non gravida. Nulla mollis tempor odio. Nunc sit amet est sit amet felis tincidunt tincidunt. Suspendisse quis augue hendrerit, tempor metus eget, placerat purus. In sed dui id magna cursus blandit. Fusce non lectus neque. Donec pretium odio eros, id maximus lacus pellentesque vel. Donec at finibus nunc.\n\nMorbi vehicula molestie eros nec dictum. Vivamus blandit auctor erat nec ultrices. Donec maximus cursus hendrerit. In in ipsum velit. Proin eu tincidunt libero, id luctus purus. Nullam ut justo elementum erat ornare sodales. Duis luctus rutrum iaculis. Morbi at aliquet mi.\n\nAliquam ullamcorper lobortis fermentum. Donec cursus odio non luctus bibendum. Fusce accumsan, urna id vulputate ultricies, augue nisl bibendum metus, sed commodo ligula sem sed velit. Nullam vel mauris sed leo finibus lobortis in vitae diam. Etiam nunc orci, posuere eu imperdiet ut, sollicitudin sed dolor. Integer at mattis elit. Nulla dolor lorem, finibus a dui quis, tincidunt ullamcorper ante. Phasellus tincidunt luctus augue, vel feugiat enim gravida eget. Integer vitae massa malesuada erat hendrerit hendrerit sed tempor nunc. Maecenas vulputate nibh tempor feugiat scelerisque.\n\nVivamus maximus porttitor egestas. Maecenas quam turpis, faucibus ut lacinia auctor, elementum at tortor. Duis at consectetur tellus. Etiam placerat pretium magna id bibendum. Nam sed sapien placerat, bibendum odio sed, tincidunt neque. Fusce consequat est ac metus laoreet tempor. Suspendisse vitae ante gravida, blandit diam a, lacinia orci. Fusce pretium eget nulla placerat finibus.\n\nSed tristique purus rutrum suscipit tristique. Fusce ullamcorper at turpis nec mattis. Cras in magna vel libero sodales laoreet. Integer maximus arcu varius imperdiet malesuada. Nunc vel efficitur nibh. Donec tincidunt augue non ornare accumsan. Nulla facilisi. Quisque urna quam, dictum id malesuada nec, cursus vel sem. Suspendisse sollicitudin massa ipsum, in posuere risus luctus ut. Quisque eget dolor ac nibh congue mollis quis vel ipsum. Donec luctus tortor sit amet elit iaculis, ut accumsan leo faucibus. Aenean felis ligula, viverra sit amet mi non, vehicula suscipit sem. Aenean odio quam, volutpat nec dolor pulvinar, finibus convallis risus. Suspendisse tristique nunc ante, ac condimentum quam tristique vitae. Nam bibendum ligula scelerisque suscipit varius.",
-      "numOfFavorites": 2,
+      "numOfFavorites": 3,
       "comments": [
         {
           "username": "test",
@@ -229,8 +263,14 @@
     {
       "title": "How to spray control the AK-47",
       "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris metus mauris, convallis at accumsan ut, cursus eu neque. Nullam cursus mollis urna varius dapibus. Nunc tellus leo, eleifend quis odio nec, viverra volutpat justo. Mauris commodo tellus eu augue tempus vulputate. Nunc quam mi, cursus non lorem non, commodo efficitur felis. Ut dapibus sollicitudin nulla sit amet ultricies. Morbi ullamcorper rutrum elit, vel laoreet risus mattis sit amet. Suspendisse potenti. Aliquam sagittis in orci non gravida. Nulla mollis tempor odio. Nunc sit amet est sit amet felis tincidunt tincidunt. Suspendisse quis augue hendrerit, tempor metus eget, placerat purus. In sed dui id magna cursus blandit. Fusce non lectus neque. Donec pretium odio eros, id maximus lacus pellentesque vel. Donec at finibus nunc.\n\nMorbi vehicula molestie eros nec dictum. Vivamus blandit auctor erat nec ultrices. Donec maximus cursus hendrerit. In in ipsum velit. Proin eu tincidunt libero, id luctus purus. Nullam ut justo elementum erat ornare sodales. Duis luctus rutrum iaculis. Morbi at aliquet mi.\n\nAliquam ullamcorper lobortis fermentum. Donec cursus odio non luctus bibendum. Fusce accumsan, urna id vulputate ultricies, augue nisl bibendum metus, sed commodo ligula sem sed velit. Nullam vel mauris sed leo finibus lobortis in vitae diam. Etiam nunc orci, posuere eu imperdiet ut, sollicitudin sed dolor. Integer at mattis elit. Nulla dolor lorem, finibus a dui quis, tincidunt ullamcorper ante. Phasellus tincidunt luctus augue, vel feugiat enim gravida eget. Integer vitae massa malesuada erat hendrerit hendrerit sed tempor nunc. Maecenas vulputate nibh tempor feugiat scelerisque.\n\nVivamus maximus porttitor egestas. Maecenas quam turpis, faucibus ut lacinia auctor, elementum at tortor. Duis at consectetur tellus. Etiam placerat pretium magna id bibendum. Nam sed sapien placerat, bibendum odio sed, tincidunt neque. Fusce consequat est ac metus laoreet tempor. Suspendisse vitae ante gravida, blandit diam a, lacinia orci. Fusce pretium eget nulla placerat finibus.\n\nSed tristique purus rutrum suscipit tristique. Fusce ullamcorper at turpis nec mattis. Cras in magna vel libero sodales laoreet. Integer maximus arcu varius imperdiet malesuada. Nunc vel efficitur nibh. Donec tincidunt augue non ornare accumsan. Nulla facilisi. Quisque urna quam, dictum id malesuada nec, cursus vel sem. Suspendisse sollicitudin massa ipsum, in posuere risus luctus ut. Quisque eget dolor ac nibh congue mollis quis vel ipsum. Donec luctus tortor sit amet elit iaculis, ut accumsan leo faucibus. Aenean felis ligula, viverra sit amet mi non, vehicula suscipit sem. Aenean odio quam, volutpat nec dolor pulvinar, finibus convallis risus. Suspendisse tristique nunc ante, ac condimentum quam tristique vitae. Nam bibendum ligula scelerisque suscipit varius.",
-      "numOfFavorites": 0,
-      "comments": [],
+      "numOfFavorites": 4,
+      "comments": [
+        {
+          "username": "test3",
+          "body": "Test 3 says hi for the first time",
+          "dateCreated": "6/3/2019, 1:07:09 AM"
+        }
+      ],
       "imageUrl": "image4.jpg",
       "dateCreated": "6/2/2019, 11:11:43 PM",
       "author": "test",

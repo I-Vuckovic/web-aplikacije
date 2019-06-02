@@ -4,6 +4,14 @@ import { fetchPosts, deletePost, fetchPost, addPost_POST, addNews, fetchNews, ad
 import { REQUEST_POST, ADD_POST, DELETE_POST, ADD_COMMENT } from '../constants/action-types';
 import { News } from '../models/news';
 
+
+export function* postRootSaga(){
+    yield fork(getPosts);
+    yield fork(addNewPost);
+    yield fork(deleteSelectedPost);
+    yield fork(addComment);
+}
+
 export function* getPosts() {
 
     const posts = yield fetchPosts();
