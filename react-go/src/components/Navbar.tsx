@@ -41,16 +41,16 @@ class Navbar extends Component<Props> {
                                     {
                                         this.props.moderator ?
                                             <li>
-                                                <li><Link to="/addpost" className="waves-effect waves-light btn indigo"> <i className="material-icons left">add</i> Add new post</Link></li>
-                                            </li>:
+                                                <li><Link to="/addpost" className="waves-effect waves-light btn indigo lighten-1"> <i className="material-icons left">add</i> Add new post</Link></li>
+                                            </li> :
                                             null
                                     }
                                     <li>
-                                        <li><Link to="/profilepage" className="waves-effect waves-light btn indigo"> <i className="material-icons left">account_circle</i> {this.props.username}</Link></li>
+                                        <li><Link to="/profilepage" className="waves-effect waves-light btn indigo lighten-1"> <i className="material-icons left">account_circle</i> {this.props.username}</Link></li>
                                     </li>
                                     <li>
 
-                                        <Link to="/" onClick={() => this.props.logout()} className="waves-effect waves-light btn indigo lighten-1">Logout</Link>
+                                        <Link to="/" onClick={() => this.props.logout()} className="waves-effect waves-light btn indigo lighten-1"><i className="material-icons left">label_outline</i>Logout</Link>
                                     </li>
                                 </li>
                                 :
@@ -63,9 +63,28 @@ class Navbar extends Component<Props> {
                 </nav>
 
                 <ul className="sidenav" id="mobile-demo">
-                    <li><Link to="/Prvi link">Prvi link</Link></li>
-                    <li><Link to="/Drugi link">Drugi link</Link></li>
-                    <li><Link to="/Treci link">Treci link</Link></li>
+                    {this.props.logedIn ?
+                        <li>
+                            {
+                                this.props.moderator ?
+                                    <li>
+                                        <li><Link to="/addpost" className="waves-effect waves-light  indigo sidenav-close"> <i className="material-icons left">add</i> Add new post</Link></li>
+                                    </li> :
+                                    null
+                            }
+                            <li>
+                                <li><Link to="/profilepage" className="waves-effect waves-light  indigo sidenav-close"> <i className="material-icons left">account_circle</i> {this.props.username}</Link></li>
+                            </li>
+                            <li>
+
+                                <Link to="/" onClick={() => this.props.logout()} className="waves-effect waves-light  indigo sidenav-close"><i className="material-icons left">label_outline</i>Logout</Link>
+                            </li>
+                        </li>
+                        :
+                        <li>
+                            <Link to="/login" className="waves-effect waves-light indigo lighten-1 sidenav-close"><i className="material-icons left">account_circle</i>Login</Link>
+                        </li>
+                    }
                 </ul>
 
             </div>

@@ -32,7 +32,8 @@ export function userReducer(state: userState = initialState, action: Action) {
                     logedIn: true,
                     userId: parseInt(localStorage.getItem("id")!),
                     username: localStorage.getItem("username")!,
-                    moderator: mod
+                    moderator: mod,
+                    favoritePosts: JSON.parse(localStorage.getItem("favoritePosts")!)
                 }
             }
             return{

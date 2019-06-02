@@ -56,7 +56,7 @@ class Home extends Component<Props> {
                             <li className="collection-header indigo white-text"><h5>News</h5></li>
                             {
                                 this.props.news.map((news:News) => 
-                                    <li className="collection-item">
+                                    <li className="collection-item" key={news.id}>
                                        <span>{` ${news.author} ${news.body} `}</span> 
                                        <p>{` ${news.time}`}</p>
                                     </li>
