@@ -1,0 +1,64 @@
+<div class="carousel carousel-slider center">
+  <div class="carousel-item red white-text" href="#one!">
+    <h2>First Panel</h2>
+    <p class="white-text">This is your first panel</p>
+  </div>
+  <div class="carousel-item amber white-text" href="#two!">
+    <h2>Second Panel</h2>
+    <p class="white-text">This is your second panel</p>
+  </div>
+  <div class="carousel-item green white-text" href="#three!">
+    <h2>Third Panel</h2>
+    <p class="white-text">This is your third panel</p>
+  </div>
+  <div class="carousel-item blue white-text" href="#four!">
+    <h2>Fourth Panel</h2>
+    <p class="white-text">This is your fourth panel</p>
+  </div>
+</div>
+<div class="container" style="margin-top: 20px;">
+  <div class="form-container">
+    <mat-form-field>
+      <mat-label>From</mat-label>
+      <mat-select>
+        <mat-option value="Grad1">
+          Grad1
+        </mat-option>
+        <mat-option value="Grad2">
+          Grad2
+        </mat-option>
+        <mat-option value="Staviti ngFor ovde kada se krene sa podacima">
+          Staviti ngFor ovde kada se krene sa podacima
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>To</mat-label>
+      <mat-select>
+        <mat-option>
+          Grad1
+        </mat-option>
+        <mat-option>
+          Grad2
+        </mat-option>
+        <mat-option>
+          Staviti ngFor ovde kada se krene sa podacima
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field >
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  class="browser-default">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput [matDatepicker]="picker1" placeholder="Choose a date"  class="browser-default"/>
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Search</button>
+  </div>
+</div>

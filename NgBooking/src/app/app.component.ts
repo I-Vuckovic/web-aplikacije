@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from "angularfire2/firestore";
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
+import { Trip } from './models/trip.model';
+import { Store } from '@ngrx/store';
+import * as fromStore from './store';
 
 @Component({
   selector: 'app-root',
@@ -9,24 +11,15 @@ import { Observable } from "rxjs";
 })
 export class AppComponent implements OnInit {
 
-
-  public test : Observable<Test[]>;
+  private trips$: Observable<Trip[]>;
   title = 'NgBooking';
 
-  constructor(private afs: AngularFirestore) {
-    this.test = this.afs.collection('test').valueChanges();
+  constructor(private store: Store<fromStore.AppState>) {
   }
 
   ngOnInit(): void {
-    this.afs.collection('test').valueChanges()
-    .subscribe( res => {
-      console.log(res);
-    })
+
+    this.trips$ = this.store.select( state => state.trips.trips);
+    this.store.dispatch(new fromStore.FetchTrips());
   }
-}
-
-
-class Test {
-  id?: string;
-  ime?: string;
 }
