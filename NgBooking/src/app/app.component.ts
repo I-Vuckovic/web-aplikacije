@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.trips$ = this.store.select( state => state.trips.trips);
+    this.trips$ = this.store.select(fromStore.getTrips);
     this.store.dispatch(new fromStore.FetchTrips());
   }
 }

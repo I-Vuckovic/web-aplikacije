@@ -11,7 +11,7 @@ import * as fromServices from '../../services';
 @Injectable()
 export class TripEffects {
     constructor(private actions$: Actions,
-        private tripService: fromServices.TripService
+                private tripService: fromServices.TripService
     ) { }
 
     @Effect()

@@ -3,12 +3,4 @@
     <button mat-flat-button class="headline">NgBooking</button>
   </div>
 </mat-toolbar>
-
-<div>
-  <ul>
-    <li *ngFor="let trip of trips$ | async">
-      {{trip.from}}  {{trip.to}} {{trip.time}}
-    </li>
-  </ul>
-</div>
 <router-outlet></router-outlet>

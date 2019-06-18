@@ -20,45 +20,60 @@
   <div class="form-container">
     <mat-form-field>
       <mat-label>From</mat-label>
-      <mat-select>
-        <mat-option value="Grad1">
-          Grad1
-        </mat-option>
-        <mat-option value="Grad2">
-          Grad2
-        </mat-option>
-        <mat-option value="Staviti ngFor ovde kada se krene sa podacima">
-          Staviti ngFor ovde kada se krene sa podacima
+      <mat-select
+        [(ngModel)]="selectedFrom"
+        (ngModelChange)="changeFromDestination()"
+      >
+        <mat-option>None</mat-option>
+        <mat-option
+          *ngFor="let destination of fromDestinations$ | async"
+          [value]="destination"
+        >
+          {{ destination }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>To</mat-label>
-      <mat-select>
-        <mat-option>
-          Grad1
-        </mat-option>
-        <mat-option>
-          Grad2
-        </mat-option>
-        <mat-option>
-          Staviti ngFor ovde kada se krene sa podacima
+      <mat-select
+        [(ngModel)]="selectedTo"
+        (ngModelChange)="changeToDestination()"
+      >
+        <mat-option>None</mat-option>
+        <mat-option
+          *ngFor="let destination of toDestinations$ | async"
+          [value]="destination"
+        >
+          {{ destination }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field >
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  class="browser-default">
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="Choose a date"
+        class="browser-default"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field >
-      <input matInput [matDatepicker]="picker1" placeholder="Choose a date"  class="browser-default"/>
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="picker1"
+        placeholder="Choose a date"
+        class="browser-default"
+      />
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
-
-    <button mat-raised-button color="primary">Search</button>
+    <a routerLink="/trip-list" routerLinkActive="active"
+      ><button mat-raised-button color="primary" >
+        Search
+      </button>
+    </a>
   </div>
 </div>
