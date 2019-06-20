@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 import { Trip, TripId } from '../models/trip.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Reservation } from '../models/reservation.model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,10 +17,10 @@ export class TripService {
 
         this.tripCollection = this.afs.collection<Trip>('trips');
         this.trips$ = this.tripCollection.snapshotChanges().pipe(
-            map(actions => actions.map (a => {
+            map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as Trip;
                 const id = a.payload.doc.id;
-                return {id, ...data};
+                return { id, ...data };
             }))
         )
     }
@@ -28,9 +29,22 @@ export class TripService {
         return this.trips$;
     }
 
-    reserveSeat(id: string, seatsLeft: number){
-        return this.tripCollection.doc(id).update({
-            freeSeats: seatsLeft
+    reserveSeat(reservation: Reservation) {
+        return this.afs.collection('reservations').add(reservation);
+    }
+
+    getTripById(id: string) {
+        return this.afs.collection('trips').doc(id).get().pipe(
+            map(document => {
+                const data = document.data() as Trip;
+                const id = document.id;
+                return { id, ...data };
+            }))
+    }
+
+    updateFreeSeats(id: string, freeSeats: number) {
+        return this.afs.collection('trips').doc(id).update({
+            freeSeats
         })
     }
 }

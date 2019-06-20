@@ -24,6 +24,7 @@ import { TripListComponent } from './components/trip-list/trip-list.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ReservationCodeComponent } from './components/reservation-code/reservation-code.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     HomePageComponent,
     TripListComponent,
     SearchBarComponent,
-    PaymentComponent
+    PaymentComponent,
+    ReservationCodeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { PaymentComponent } from './components/payment/payment.component';
     FilterPipeModule,
     ReactiveFormsModule
   ],
+  entryComponents: [ReservationCodeComponent],
   providers: [AngularFireDatabase],
   bootstrap: [AppComponent]
 })

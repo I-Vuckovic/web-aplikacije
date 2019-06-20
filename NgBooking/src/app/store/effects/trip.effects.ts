@@ -7,12 +7,17 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import * as tripActions from '../actions/trip.actions';
 import * as fromServices from '../../services';
 import * as reservationActions from '../actions/reservation.actions';
+import { Trip } from 'src/app/models/trip.model';
+import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
+import { PaymentComponent } from 'src/app/components/payment/payment.component';
+import { ReservationCodeComponent } from 'src/app/components/reservation-code/reservation-code.component';
 
 
 @Injectable()
 export class TripEffects {
     constructor(private actions$: Actions,
-        private tripService: fromServices.TripService
+        private tripService: fromServices.TripService,
+        public dialog: MatDialog
     ) { }
 
     @Effect()
@@ -32,9 +37,19 @@ export class TripEffects {
     reserveSeat$ = this.actions$.pipe(
         ofType(reservationActions.RESERVE_SEAT),
         switchMap((action: reservationActions.ReserveSeat) =>
-            this.tripService.reserveSeat(action.payload, action.seatsLeft)
-                .then(() => new reservationActions.ReserveSeatSucess(action.payload, action.seatsLeft))
+            this.tripService.reserveSeat(action.payload)
+                .then(ref => this.dialog.open(ReservationCodeComponent, {data: ref.id}))
+                .then(() => new reservationActions.ReserveSeatSucess(action.payload.tripId, action.freeSeats))
                 .catch(() => new reservationActions.ReserveSeatFail())
         ),
+    )
+
+    @Effect()
+    reserveSeatSucess = this.actions$.pipe(
+        ofType(reservationActions.RESERVE_SEAT_SUCESS),
+        switchMap((action: reservationActions.ReserveSeatSucess) =>
+            this.tripService.updateFreeSeats(action.payload, action.freeSeats)
+                .then(() => new tripActions.UpdateFreeSeats(action.payload, action.freeSeats))
+        )
     )
 }

@@ -21,12 +21,14 @@
       >
     </div>
   </div>
+ 
   <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>User information</ng-template>
         <mat-form-field>
           <input
+            [(ngModel)]="reservation.firstName"
             formControlName="firstCtrl"
             matInput
             placeholder="First name"
@@ -36,6 +38,7 @@
         </mat-form-field>
         <mat-form-field>
           <input
+            [(ngModel)]="reservation.lastName"
             formControlName="firstCtrl"
             matInput
             placeholder="Last name"
@@ -45,6 +48,7 @@
         </mat-form-field>
         <mat-form-field>
           <input
+            [(ngModel)]="reservation.phoneNumber"
             formControlName="firstCtrl"
             matInput
             placeholder="Phone number"
@@ -59,23 +63,31 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
+      
         <div class="container extra-payment">
           <ng-template matStepLabel>Extra payment</ng-template>
-          <mat-checkbox>Check me!</mat-checkbox>
-          <mat-checkbox>Check me!</mat-checkbox>
-          <mat-checkbox>Check me!</mat-checkbox>
+          <mat-checkbox [(ngModel)]="extraLuggage">Extra luggage + {{ trip.extraLuggage }}</mat-checkbox>
+          <mat-checkbox>Some other expense</mat-checkbox>
+          <mat-checkbox>Carbon footprint</mat-checkbox>
+
+          <h3>
+            Current price: {{ (trip.price + (extraLuggage? trip.extraLuggage : 0)) | number}}
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >euro_symbol</mat-icon
+            >
+          </h3>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </div>
-      </form>
+      
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+      <button mat-button-raised (click)="makeReservation()">Pay</button>
+      <mat-spinner *ngIf="processing"></mat-spinner>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>

@@ -48,10 +48,10 @@ export function tripReducer(state: TripState = initialState,
                 loaded: false,
             };
 
-        case Actions.RESERVE_SEAT_SUCESS:
-            return adapter.updateOne({ id: action.payload, changes: { freeSeats: action.seatsLeft, seatReserved: true } }, {
-                ...state
-            })
+        case Actions.UPDATE_FREE_SEATS:
+            return adapter.updateOne({id: action.tripId, changes : {
+                freeSeats: action.freeSeats
+            }}, state)
 
         default:
             return state;

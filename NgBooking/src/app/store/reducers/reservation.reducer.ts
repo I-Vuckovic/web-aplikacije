@@ -1,13 +1,20 @@
 import * as ReservationActions from '../actions/reservation.actions';
+import { Reservation } from 'src/app/models/reservation.model';
 
 export interface ReservationState {
-    tripId: string;
-    reserved: boolean;
+    reservation: Reservation;
+    processing: boolean;
+    processed: boolean;
 }
 
 const initialState: ReservationState = {
-    tripId: '',
-    reserved: false
+    reservation: {
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+    },
+    processing: false,
+    processed: false,
 }
 
 export function reservationReducer(state: ReservationState = initialState,
@@ -18,22 +25,22 @@ export function reservationReducer(state: ReservationState = initialState,
         case ReservationActions.RESERVE_SEAT:
             return {
                 ...state,
-                tripId: action.payload,
-                reserved: false,
+                processing: true,
+                processed: false,
             }
 
         case ReservationActions.RESERVE_SEAT_SUCESS:
             return {
                 ...state,
-                tripId: '',
-                reserved: true
+                processing: false,
+                processed: true,
             }
 
         case ReservationActions.RESERVE_SEAT_FAIL:
             return{
                 ...state,
-                tripId: 'error',
-                reserved: false
+                processing: false,
+                processed: false,
             }
 
         default:

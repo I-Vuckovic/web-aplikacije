@@ -9,6 +9,7 @@ export interface Trip {
     duration: string;
     freeSeats: number;
     seatReserved: boolean;
+    extraLuggage: number;
 }
 
 export interface TripId extends Trip {
