@@ -1,0 +1,85 @@
+<div class="container" style="margin-top: 20px;">
+  <div class="trip-info">
+    <div>
+      {{ trip.from }}
+    </div>
+    <div>
+      {{ trip.to }}
+    </div>
+    <div>
+      {{ trip.time | date: "short" }}
+    </div>
+    <div>{{ trip.distance }}km</div>
+    <div>{{ trip.duration }}</div>
+    <div>
+      {{ trip.price }}
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Example home icon"
+        style="font-size: 20px;"
+        >euro_symbol</mat-icon
+      >
+    </div>
+  </div>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>User information</ng-template>
+        <mat-form-field>
+          <input
+            formControlName="firstCtrl"
+            matInput
+            placeholder="First name"
+            required
+            class="browser-default"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="firstCtrl"
+            matInput
+            placeholder="Last name"
+            required
+            class="browser-default"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="firstCtrl"
+            matInput
+            placeholder="Phone number"
+            required
+            class="browser-default"
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <div class="container extra-payment">
+          <ng-template matStepLabel>Extra payment</ng-template>
+          <mat-checkbox>Check me!</mat-checkbox>
+          <mat-checkbox>Check me!</mat-checkbox>
+          <mat-checkbox>Check me!</mat-checkbox>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

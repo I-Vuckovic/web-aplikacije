@@ -6,12 +6,13 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 
 import * as tripActions from '../actions/trip.actions';
 import * as fromServices from '../../services';
+import * as reservationActions from '../actions/reservation.actions';
 
 
 @Injectable()
 export class TripEffects {
     constructor(private actions$: Actions,
-                private tripService: fromServices.TripService
+        private tripService: fromServices.TripService
     ) { }
 
     @Effect()
@@ -25,5 +26,15 @@ export class TripEffects {
                     catchError(error => of(new tripActions.FetchTripsFail(error))),
                 )
         )
+    )
+
+    @Effect()
+    reserveSeat$ = this.actions$.pipe(
+        ofType(reservationActions.RESERVE_SEAT),
+        switchMap((action: reservationActions.ReserveSeat) =>
+            this.tripService.reserveSeat(action.payload, action.seatsLeft)
+                .then(() => new reservationActions.ReserveSeatSucess(action.payload, action.seatsLeft))
+                .catch(() => new reservationActions.ReserveSeatFail())
+        ),
     )
 }

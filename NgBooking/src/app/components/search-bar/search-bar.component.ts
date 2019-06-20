@@ -10,24 +10,24 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   
-
-  private selectedFromSubscription: Subscription;
-  private selectedToSubscription: Subscription;
+  private startDate: Date;
+  private subscription: Subscription;
+  private selectedEndDate: Date;
+  private selectedStartDate: Date;
   private selectedFrom: string;
   private selectedTo: string;
-  private selected;
   private toDestinations$: Observable<string[]>;
   private fromDestinations$: Observable<string[]>;
 
   constructor(private store: Store<fromStore.AppState>) { }
 
   ngOnInit() {
-
-    this.selectedFromSubscription = this.store.select(fromStore.getFromFilter).subscribe( res => {
-      this.selectedFrom = res;
-    })
-    this.selectedToSubscription = this.store.select(fromStore.getToFilter).subscribe( res => {
-      this.selectedTo = res;
+    this.startDate = new Date();
+    this.subscription = this.store.select(fromStore.selectFilterState).subscribe( res => {
+      this.selectedFrom = res.from;
+      this.selectedTo = res.to;
+      this.selectedEndDate = res.endDate;
+      this.selectedStartDate = res.startDate;
     })
 
     this.fromDestinations$ = this.store.select(fromStore.getFromDestination, this.selectedTo);
@@ -35,15 +35,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.selectedFromSubscription.unsubscribe();
-    this.selectedToSubscription.unsubscribe();
+
+    this.subscription.unsubscribe();
   }
 
   changeToDestination() {
     if (this.selectedTo === undefined) {
       this.selectedTo = '';
     }
-    //this.fromDestinations$ = this.store.select(fromStore.getFromDestination, this.selectedTo);
     this.store.dispatch(new fromStore.ChangeToDestination(this.selectedTo));
   }
 
@@ -51,9 +50,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     if (this.selectedFrom === undefined) {
       this.selectedFrom = '';
     }
-    //this.toDestinations$ = this.store.select(fromStore.getToDestination, this.selectedFrom);
     this.store.dispatch(new fromStore.ChangeFromDestination(this.selectedFrom));
   }
 
+  onStartDateChange(){
+    this.store.dispatch(new fromStore.ChangeStartDate(this.selectedStartDate));
+  }
+
+  onEndDateChange(){
+    this.store.dispatch(new fromStore.ChangeEndDate(this.selectedEndDate));
+  }
 
 }

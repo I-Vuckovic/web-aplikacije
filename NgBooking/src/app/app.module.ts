@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MaterializeModule } from 'angular2-materialize';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -23,13 +23,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     TripListComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot(effects),
     FormsModule,
-    FilterPipeModule
+    FilterPipeModule,
+    ReactiveFormsModule
   ],
   providers: [AngularFireDatabase],
   bootstrap: [AppComponent]

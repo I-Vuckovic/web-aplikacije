@@ -1,0 +1,16 @@
+.trip-info{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+    border-radius: 50px;
+    border: solid lightgray;
+    min-height: 100px;
+}
+
+.extra-payment{
+    display: flex;
+    flex-direction: column; 
+}

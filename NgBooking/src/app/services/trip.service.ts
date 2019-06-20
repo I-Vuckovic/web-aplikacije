@@ -27,4 +27,10 @@ export class TripService {
     getTrips() {
         return this.trips$;
     }
+
+    reserveSeat(id: string, seatsLeft: number){
+        return this.tripCollection.doc(id).update({
+            freeSeats: seatsLeft
+        })
+    }
 }

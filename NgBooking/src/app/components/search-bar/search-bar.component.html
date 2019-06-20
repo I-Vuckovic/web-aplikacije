@@ -32,28 +32,32 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field > 
       <input
         matInput
         [matDatepicker]="picker"
-        placeholder="Choose a date"
+        placeholder="Earliest departue"
         class="browser-default"
+        required (dateChange)="onStartDateChange()"
+        [(ngModel)]="selectedStartDate"
       />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="month" [startAt]="startDate"></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
       <input
         matInput
         [matDatepicker]="picker1"
-        placeholder="Choose a date"
+        placeholder="Latest departure"
         class="browser-default"
+        [(ngModel)]="selectedEndDate"
+        required (dateChange)="onEndDateChange()"
       />
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+      <mat-datepicker #picker1 startView="month" [startAt]="startDate"></mat-datepicker>
     </mat-form-field>
-    <a routerLink="/trip-list" routerLinkActive="active"
-      ><button mat-raised-button color="primary">
+    <a routerLink="/trip-list" routerLinkActive="active">
+      <button mat-raised-button color="primary">
         Search
       </button>
     </a>

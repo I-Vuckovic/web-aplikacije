@@ -1,6 +1,18 @@
 <mat-toolbar class="app-toolbar" color="primary">
   <div class="container ">
-    <button mat-flat-button class="headline">NgBooking</button>
+    <a routerLink="/home" routerLinkActive="active" class="white-text">
+      NgBooking
+    </a>
   </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="page-footer deep-purple  darken-2 " >
+  <div class="footer-copyright">
+    <div class="container ">
+      © 2019 Copyright I-Vuckovic
+    </div>
+  </div>
+</footer>

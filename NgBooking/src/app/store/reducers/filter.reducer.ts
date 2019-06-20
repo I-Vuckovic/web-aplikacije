@@ -12,8 +12,8 @@ export interface FilterState {
 const intitialState: FilterState = {
     to: '',
     from: '',
-    startDate: new Date(-8640000000000000),
-    endDate: new Date(8640000000000000),
+    startDate: new Date(0),
+    endDate: new Date(2025, 0, 0, 0, 0, 0, 0),
 }
 
 export function filterReducer(state: FilterState = intitialState, action: FilterActions.FilterActions): FilterState {
