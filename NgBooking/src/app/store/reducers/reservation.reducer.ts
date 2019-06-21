@@ -5,6 +5,9 @@ export interface ReservationState {
     reservation: Reservation;
     processing: boolean;
     processed: boolean;
+    fetchingReservation: boolean;
+    fetchingReservationSucess: boolean;
+    fetchingReservationFail: boolean;
 }
 
 const initialState: ReservationState = {
@@ -12,13 +15,17 @@ const initialState: ReservationState = {
         firstName: '',
         lastName: '',
         phoneNumber: '',
+        email: '',
     },
     processing: false,
     processed: false,
+    fetchingReservation: false,
+    fetchingReservationSucess: false,
+    fetchingReservationFail: false,
 }
 
 export function reservationReducer(state: ReservationState = initialState,
-                                   action: ReservationActions.ReservationActions): ReservationState {
+    action: ReservationActions.ReservationActions): ReservationState {
 
     switch (action.type) {
 
@@ -37,10 +44,33 @@ export function reservationReducer(state: ReservationState = initialState,
             }
 
         case ReservationActions.RESERVE_SEAT_FAIL:
-            return{
+            return {
                 ...state,
                 processing: false,
                 processed: false,
+            }
+
+        case ReservationActions.FETCH_RESERVATION:
+            return {
+                ...state,
+                fetchingReservation: true,
+            }
+
+        case ReservationActions.FETCH_RESERVATION_FAIL:
+            return {
+                ...state,
+                fetchingReservation: false,
+                fetchingReservationFail: true,
+                fetchingReservationSucess: false,
+            }
+
+        case ReservationActions.FETCH_RESERVATION_SUCESS:
+            return {
+                ...state,
+                fetchingReservation: false,
+                fetchingReservationFail: false,
+                fetchingReservationSucess: true,
+                reservation: action.payload
             }
 
         default:

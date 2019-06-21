@@ -29,16 +29,13 @@ export class TripService {
         return this.trips$;
     }
 
-    reserveSeat(reservation: Reservation) {
-        return this.afs.collection('reservations').add(reservation);
-    }
 
     getTripById(id: string) {
         return this.afs.collection('trips').doc(id).get().pipe(
             map(document => {
                 const data = document.data() as Trip;
                 const id = document.id;
-                return { id, ...data };
+                return { id , ...data };
             }))
     }
 

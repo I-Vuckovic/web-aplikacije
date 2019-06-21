@@ -13,6 +13,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { environment } from '../environments/environment';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
@@ -25,6 +26,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ReservationCodeComponent } from './components/reservation-code/reservation-code.component';
+import { ReservationSearchComponent } from './components/reservation-search/reservation-search.component';
+import { ReservationInfoComponent } from './components/reservation-info/reservation-info.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,9 @@ import { ReservationCodeComponent } from './components/reservation-code/reservat
     TripListComponent,
     SearchBarComponent,
     PaymentComponent,
-    ReservationCodeComponent
+    ReservationCodeComponent,
+    ReservationSearchComponent,
+    ReservationInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { ReservationCodeComponent } from './components/reservation-code/reservat
     EffectsModule.forRoot(effects),
     FormsModule,
     FilterPipeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireStorageModule
   ],
   entryComponents: [ReservationCodeComponent],
   providers: [AngularFireDatabase],

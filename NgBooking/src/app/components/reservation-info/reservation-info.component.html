@@ -1,0 +1,16 @@
+<div class="reservation">
+  <div class="informaion">
+    <h5>User information:</h5>
+    <p>Name: {{ reservation.firstName }}</p>
+    <p>Surname: {{ reservation.lastName }}</p>
+    <p>Phone number: {{ reservation.phoneNumber }}</p>
+  </div>
+  <div class="informaion" >
+    <h5>Trip information:</h5>
+    <p>From: {{ trip.from }}</p>
+    <p>To: {{ trip.to }}</p>
+    <p>time: {{ trip.time | date: "short" }}</p>
+    <p>Distance: {{ trip.distance }}km</p>
+    <p>Duration: {{ trip.duration }}</p>
+  </div>
+</div>

@@ -1,23 +1,24 @@
-.form-container {
-  padding-top: 15px;
-  margin-top: 20px;
+.flex {
   display: flex;
-  flex-direction: row;
-  background-color: lightblue;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  height: 100%;
-  border-radius: 50px;
+  flex-direction: column;
+  align-content: center;
+
+  justify-content: center;
 }
 
-.browser-default,
-.browser-default :focus {
-  border-bottom: none;
-  outline: none;
-  text-decoration: none;
-  margin: 0;
-  padding: 0;
+.info-container {
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.failed-fetch{
+  min-width: 200px;
+  border: 3px solid red;
+  border-radius: 50px;
+  text-align: center;
+  max-width: 300px;
 }
 
 /* label color */

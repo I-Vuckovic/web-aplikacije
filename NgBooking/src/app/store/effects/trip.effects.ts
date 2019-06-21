@@ -11,13 +11,15 @@ import { Trip } from 'src/app/models/trip.model';
 import { MatSnackBar, MatDialog, MatDialogConfig } from '@angular/material';
 import { PaymentComponent } from 'src/app/components/payment/payment.component';
 import { ReservationCodeComponent } from 'src/app/components/reservation-code/reservation-code.component';
+import { ReservationService } from 'src/app/services/reservation.service';
 
 
 @Injectable()
 export class TripEffects {
     constructor(private actions$: Actions,
         private tripService: fromServices.TripService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private reservationService: ReservationService
     ) { }
 
     @Effect()
@@ -31,17 +33,6 @@ export class TripEffects {
                     catchError(error => of(new tripActions.FetchTripsFail(error))),
                 )
         )
-    )
-
-    @Effect()
-    reserveSeat$ = this.actions$.pipe(
-        ofType(reservationActions.RESERVE_SEAT),
-        switchMap((action: reservationActions.ReserveSeat) =>
-            this.tripService.reserveSeat(action.payload)
-                .then(ref => this.dialog.open(ReservationCodeComponent, {data: ref.id}))
-                .then(() => new reservationActions.ReserveSeatSucess(action.payload.tripId, action.freeSeats))
-                .catch(() => new reservationActions.ReserveSeatFail())
-        ),
     )
 
     @Effect()

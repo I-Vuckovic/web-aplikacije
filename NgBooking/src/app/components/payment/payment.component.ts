@@ -26,6 +26,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
   secondFormGroup: FormGroup;
 
   private extraLuggage: boolean;
+  private carbonFootprint: boolean;
   private reservation: Reservation;
   private trip: Trip;
   private tripSubscription: Subscription;
@@ -40,7 +41,8 @@ export class PaymentComponent implements OnInit, OnDestroy {
     this.reservation = {
       firstName: '',
       lastName: '',
-      phoneNumber: ''
+      phoneNumber: '',
+      email: '',
     };
     const id = this.route.snapshot.paramMap.get('tripId');
 
@@ -55,7 +57,10 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
 
     this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      email: ['', Validators.required],
     });
     this.secondFormGroup = this.formBuilder.group({
 
@@ -68,7 +73,9 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   makeReservation() {
-    const finalPrice = this.trip.price + (this.extraLuggage ? this.trip.extraLuggage : 0);
+    const finalPrice = this.trip.price +
+      (this.extraLuggage ? this.trip.extraLuggage : 0) +
+      (this.carbonFootprint ? 0.5 : 0);
     this.reservation.tripId = this.trip.id;
     this.reservation.finalPrice = finalPrice;
     this.store.dispatch(new fromStore.ReserveSeat(this.reservation, this.trip.freeSeats - 1));
